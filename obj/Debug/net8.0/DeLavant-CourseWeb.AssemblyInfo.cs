@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59c1cbfb529f44d3f0b70d9a2a587a806dc12e61")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4e48efdedc23b84be41905bb3548072d445f40f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
