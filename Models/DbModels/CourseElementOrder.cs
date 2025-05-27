@@ -1,8 +1,7 @@
 namespace DeLavant_CourseWeb.Models;
-public class TestElementOrder
+public class CourseElementOrder
     {
-        public string? CourseId;
+        public string? Position;
         public string? Type;
         public string? ElementCourseId;
-        public string? Position;
     }

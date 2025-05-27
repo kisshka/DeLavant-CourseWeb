@@ -15,4 +15,5 @@ public class Course {
     //Список лекций и тестов
     public List<Lecture>? Lectures { get; set; }
     public List<Test>? Tests { get; set; }
+    public List<CourseElementOrder>? CourseElementOrders { get; set; }
 }
