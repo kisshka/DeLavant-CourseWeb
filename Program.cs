@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using DeLavant_CourseWeb.Models.UserBd;
 using MongoDB.Driver;
 namespace DeLavant_CourseWeb
 {
@@ -6,16 +9,26 @@ namespace DeLavant_CourseWeb
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("DeLavantContextConnection") ?? throw new InvalidOperationException("Connection string 'DeLavantContextConnection' not found.");
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<DeLavantContext>(options => options.UseSqlite(connectionString));
+
+            var connectionStringMongo = builder.Configuration.GetConnectionString("DefaultConnection");
             
-            var mongoClient = new MongoClient(connectionString);
+            var mongoClient = new MongoClient(connectionStringMongo);
             var database = mongoClient.GetDatabase("CourseDb");
 
             builder.Services.AddSingleton(mongoClient);
             builder.Services.AddSingleton(database);
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDefaultIdentity<User>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<DeLavantContext>()
+            .AddDefaultTokenProviders();
 
             var app = builder.Build();
 
@@ -30,12 +43,13 @@ namespace DeLavant_CourseWeb
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.MapRazorPages();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Course}/{action=Index}/{id?}");
+                pattern: "{controller=Accounts}/{action=Index}/{id?}");
 
             app.Run();
         }
