@@ -1,0 +1,72 @@
+﻿@model IEnumerable<DeLavant_CourseWeb.Models.UserBd.User>
+<p>
+    <a asp-action="Create">Создать нового пользователя</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Фамилия
+            </th>
+            <th>
+                Имя
+            </th>
+            <th>
+                Отчество
+            </th>
+            <th>
+                Должность
+            </th>
+            <th>
+                Участок
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserSurName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserFatherName)
+                </td>
+                <td>
+                    @if (item.Posts != null && item.Posts.Any())
+                    {
+                        var titles = item.Posts.Select(p => p.Title).ToArray();
+                        if (titles.Length > 1)
+                        {
+                            @string.Join("/", titles)
+                        }
+                        else
+                        {
+                            @titles.FirstOrDefault()
+                        }
+                    }
+                </td>
+                <td>
+                    @if (item.Areas != null)
+                    {
+                        @item.Areas.NameArea
+                    }
+                    else
+                    {
+                        <span>не закреплён за участком</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

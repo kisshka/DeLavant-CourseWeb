@@ -1,4 +1,4 @@
-namespace DeLavant_CourseWeb.Models
+namespace DeLavant_CourseWeb.Models.UserBd
 {
     public class ErrorViewModel
     {

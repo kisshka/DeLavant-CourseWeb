@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿ function filterCategories() {
+        const input = document.getElementById('search-post');
+    const filter = input.value.trim().toLowerCase();
+    const select = document.getElementById('post-list');
+    const options = select.querySelectorAll('option');
 
-// Write your JavaScript code.
+        options.forEach(option => {
+            const text = option.textContent.trim().toLowerCase();
+    if (text.includes(filter)) {
+        option.style.display = '';
+            } else {
+        option.style.display = 'none';
+            }
+        });
+    }
