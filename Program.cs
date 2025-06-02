@@ -13,9 +13,9 @@ namespace DeLavant_CourseWeb
 
             builder.Services.AddDbContext<DeLavantContext>(options => options.UseSqlite(connectionString));
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var connectionStringMongo = builder.Configuration.GetConnectionString("DefaultConnection");
             
-            var mongoClient = new MongoClient(connectionString);
+            var mongoClient = new MongoClient(connectionStringMongo);
             var database = mongoClient.GetDatabase("CourseDb");
 
             builder.Services.AddSingleton(mongoClient);
