@@ -1,0 +1,20 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "Курсы";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Курсы</h1>
+<div>
+    @foreach (var course in Model) {
+   <a asp-action="Edit" asp-route-id="@course.Id">    
+        <h2>@course.Name</h2>
+            <p>@course.Description</p>
+            <p>@course.CreatingDate</p>
+    </a>    
+    }
+
+</div>
+
+<a asp-controller="Course" asp-action="Create" class="btn_add_element">Добавить</a>
+</div>

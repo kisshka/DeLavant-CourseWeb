@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DeLavant_CourseWeb.Models.UserBd;
+using MongoDB.Driver;
 namespace DeLavant_CourseWeb
 {
     public class Program
@@ -12,7 +13,14 @@ namespace DeLavant_CourseWeb
 
             builder.Services.AddDbContext<DeLavantContext>(options => options.UseSqlite(connectionString));
 
-            // Add services to the container.
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            
+            var mongoClient = new MongoClient(connectionString);
+            var database = mongoClient.GetDatabase("CourseDb");
+
+            builder.Services.AddSingleton(mongoClient);
+            builder.Services.AddSingleton(database);
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddDefaultIdentity<User>(options =>
             {
@@ -24,15 +32,14 @@ namespace DeLavant_CourseWeb
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();

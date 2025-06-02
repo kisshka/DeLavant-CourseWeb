@@ -1,0 +1,27 @@
+@model DeLavant_CourseWeb.Models.Test
+@{
+    ViewData["Title"] = "Редактирование теста";
+}
+
+<h2>Редактирование теста</h2>
+
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="All"></div>
+
+    <input type="hidden" name="courseId" value="@ViewBag.courseIdForTest" />
+    <input type="hidden" name="testId" value="@Model.Id" />
+
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Name">Название:</label>
+        <input type="text" asp-for="Name" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Описание:</label>
+        <input type="text" asp-for="Description" required />
+    </div>
+
+@* Добавление раздела курса *@
+    <a asp-controller="Course" asp-action="Index">Назад</a>
+    <button type="submit">Сохранить</button>
+</form>
