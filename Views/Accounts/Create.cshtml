@@ -1,0 +1,63 @@
+﻿@using DeLavant_CourseWeb.Models.UserBd;
+@model DeLavant_CourseWeb.Models.UserBd.RegisterInputModel;
+
+
+<h1>Создать пользователя</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserSurName" class="control-label"></label>
+                <input asp-for="UserSurName" class="form-control" />
+                <span asp-validation-for="UserSurName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserFatherName" class="control-label"></label>
+                <input asp-for="UserFatherName" class="form-control" />
+                <span asp-validation-for="UserFatherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Должность:</label>
+                <input type="text" id="search-post" class="form-control" placeholder="Поиск..." onkeyup="filterCategories()" autocomplete="off" />
+                <select asp-for="SelectedPostIds" class="form-control" id="post-list" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)" multiple></select>
+                <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedAreaId" class="control-label">Участок:</label>
+                <select asp-for="SelectedAreaId" class="form-control" asp-items="@(ViewBag.Areas)">
+                    <option disabled selected>-- Выберите участок --</option>
+                </select>
+                <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться назад</a>
+</div>
