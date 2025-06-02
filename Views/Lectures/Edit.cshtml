@@ -1,0 +1,35 @@
+@model DeLavant_CourseWeb.Models.LectureIn
+@{
+    ViewData["Title"] = "Редактирование лекции";
+}
+
+<h2>Редактирование Лекции</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
+
+    <input type="hidden" name="courseId" value="@ViewBag.courseIdForLection" />
+    <input type="hidden" name="lectureId" value="@Model.Id" />
+
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Name">Название:</label>
+        <input type="text" asp-for="Name" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Описание:</label>
+        <input type="text" asp-for="Description" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="LectureFile">Файл:</label>
+        <input type="file" asp-for="LectureFile" accept=".pptx,.docx,.mp4"/>
+    </div>
+
+@* Добавление раздела курса *@
+    <a asp-controller="Course" asp-action="Index">Назад</a>
+    <button type="submit">Сохранить</button>
+</form>
+
+
+
+

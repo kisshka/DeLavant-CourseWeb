@@ -35,7 +35,7 @@ namespace DeLavant_CourseWeb
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Course}/{action=Index}/{id?}");
 
             app.Run();
         }

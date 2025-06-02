@@ -1,0 +1,64 @@
+@model DeLavant_CourseWeb.Models.Course
+@{
+    ViewData["Title"] = "Редактирование курса";
+}
+
+<h2>Редактирование курса</h2>
+
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="All"></div>
+
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Name">Название:</label>
+        <input type="text" asp-for="Name" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Описание:</label>
+        <input type="text" asp-for="Description" required />
+    </div>
+
+@* Добавление раздела курса *@
+        <div>
+            <a asp-controller="Course" asp-action="AddLection" asp-route-id="@Model.Id">Добавить лекцию</a>
+        </div>
+        <div>
+            <a asp-controller="Course" asp-action="AddTest" asp-route-id="@Model.Id">Добавить тест</a>
+        </div>
+@* Вывод лекций и тестов *@
+    <h3>Лекции:</h3>
+    @if (Model.Lectures != null && Model.Lectures.Any()) {
+
+            @foreach( var lecture in Model.Lectures) {
+                <p>
+                    <a asp-controller="Lectures" asp-action="Edit" asp-route-courseId="@Model.Id"  asp-route-lectureId="@lecture.Id">       
+                        @lecture.Name
+                        @lecture.Description
+                    </a>
+                   <a asp-controller="Lectures" asp-action="Delete" asp-route-courseId="@Model.Id"  asp-route-lectureId="@lecture.Id">Удалить</a>
+                </p>
+            }
+    }
+
+    <h3>Тесты:</h3>
+    @if (Model.Tests != null && Model.Tests.Any()) {
+        <p>
+            @foreach( var test in Model.Tests) {
+            <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@Model.Id" asp-route-testId="@test.Id">  
+                @test.Name
+                @test.Description
+            </a>
+            <a asp-controller="Tests" asp-action="Delete" asp-route-courseId="@Model.Id"  asp-route-testId="@test.Id">Удалить</a>
+
+            }
+        </p>
+    }
+
+    <a asp-controller="Course" asp-action="Index">Назад</a>
+    <button type="submit">Сохранить</button>
+</form>
+
+
+
+
