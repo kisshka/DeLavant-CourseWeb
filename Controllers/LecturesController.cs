@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using DeLavant_CourseWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;

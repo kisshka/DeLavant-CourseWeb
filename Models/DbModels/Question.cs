@@ -17,9 +17,9 @@ public class Question {
     public QuestionType QuestionType { get; set; }
 
     //структуры для разных типов ответов
-    public List<string>? AnswerOptions { get; set; }
+    public List<AnswerOption>? AnswerOptions { get; set; }
     public string? ExtendedResponse { get; set; }
-    public List<string>? StepsSequence { get; set; } 
+    public List<Step>? StepsSequence { get; set; } 
     //баллы за вопрос
     public int Points { get; set; }
 
