@@ -32,8 +32,7 @@ namespace DeLavant_CourseWeb.Controllers
             {
                 Id = lecture.Id,
                 Name = lecture.Name,
-                Description = lecture.Description,
-                FileType = lecture.FileType
+                Description = lecture.Description
             };
             ViewBag.FileName = lecture.FileName;
             ViewBag.courseIdForLection = courseId;
@@ -65,12 +64,46 @@ namespace DeLavant_CourseWeb.Controllers
         }
 
         string? newFileName = editedLecture.FileName;
+
+    //Работа с файлом  
     if (lectureIn.LectureFile != null)
     {
-
+        //Сначала происходит удаление старого файла
+        string oldFileNameFullPath = environment.WebRootPath + $"/{editedLecture.FileType}/" + editedLecture.FileName;
+        if (System.IO.File.Exists(oldFileNameFullPath))
+            {
+                System.IO.File.Delete(oldFileNameFullPath);
+            }
+        //далее определяется тип нового файла
+        string? folder;
+        switch(Path.GetExtension(lectureIn.LectureFile.FileName))
+        {
+            case ".pdf":
+                folder = "Pdf";
+                editedLecture.FileType = "Pdf";
+            break;
+            case ".docx":
+                folder = "Word";
+                editedLecture.FileType = "Word";
+            break;
+            case ".doc":
+                folder = "Word";
+                editedLecture.FileType = "Word";                
+            break;
+            case ".mp4":
+                folder = "Mp4";              
+                editedLecture.FileType = "Mp4";                
+            break;
+            case ".pptx":
+                folder = "Pptx";   
+                editedLecture.FileType = "Pptx";                           
+            break;
+            default:
+                return View(lectureIn);
+        }
+        //присваивается новое имя
         newFileName = Guid.NewGuid().ToString() + Path.GetExtension(lectureIn.LectureFile.FileName);
-
-        string imageFullPath = environment.WebRootPath + "/Pdf/" + newFileName;
+        string imageFullPath = environment.WebRootPath + $"/{folder}/" + newFileName;
 
         // Копируем файл на сервер
         using (var fileStream = new FileStream(imageFullPath, FileMode.Create))
@@ -78,14 +111,11 @@ namespace DeLavant_CourseWeb.Controllers
             lectureIn.LectureFile.CopyTo(fileStream);
         }
 
+    }
+
             editedLecture.Name = lectureIn.Name;
             editedLecture.Description = lectureIn.Description;
-            editedLecture.FileType = lectureIn.FileType;
             editedLecture.FileName = newFileName;
-        }
-
-        // Проверка валидности модели
-
 
         coursesCollection.UpdateOne(
             c => c.Id == courseId,
@@ -101,8 +131,15 @@ namespace DeLavant_CourseWeb.Controllers
             var coursesCollection = _database.GetCollection<Course>("Courses");
             var course = coursesCollection.Find(c => c.Id == courseId).FirstOrDefault();
             var indexOfLecture = course.Lectures.FindIndex(l => l.Id == lectureId);
-            
+            var deletedLecture = course.Lectures.FirstOrDefault(l => l.Id == lectureId);
+
+        string? folderForDelete = GetFolderForDelete(deletedLecture.FileType);
             course.Lectures.RemoveAt(indexOfLecture);
+            string oldFileNameFullPath = environment.WebRootPath + $"/{folderForDelete}/" + deletedLecture.FileName;
+            if (System.IO.File.Exists(oldFileNameFullPath))
+            {
+                System.IO.File.Delete(oldFileNameFullPath);
+            }
 
         // Обновляем коллекцию в базе данных
         coursesCollection.UpdateOne(
@@ -111,6 +148,23 @@ namespace DeLavant_CourseWeb.Controllers
         );
 
             return RedirectToAction(nameof(Edit), "Course" , new { id=courseId}); // Перенаправляем на страницу списка курсов
+        }
+
+// определяет папку для удаления по типу
+        public string GetFolderForDelete (string? fileType) {
+            switch(fileType)
+                {
+                    case "Pdf":
+                        return "Pdf";
+                    case "Word":
+                       return "Word";
+                    case "Mp4":
+                        return "Mp4";                            
+                    case "Pptx":
+                        return "Pptx";                          
+                    default:
+                        return "None";
+                }
         }
 
     }

@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DeLavant_CourseWeb.Models;
 
+
 public class Lecture {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

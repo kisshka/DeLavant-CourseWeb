@@ -22,6 +22,6 @@
     </div>
 
 @* Добавление раздела курса *@
-    <a asp-controller="Course" asp-action="Index">Назад</a>
+    <a asp-controller="Course" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Назад</a>
     <button type="submit">Сохранить</button>
 </form>
