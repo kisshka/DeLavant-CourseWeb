@@ -66,6 +66,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>
+                </td>
             </tr>
         }
     </tbody>

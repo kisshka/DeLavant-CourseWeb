@@ -12,6 +12,6 @@ namespace DeLavant_CourseWeb.Models.UserBd
         [MinLength(3, ErrorMessage = "Участок должен содержать больше 3 символов.")]
         public string? NameArea { get; set; }
 
-        public User? User { get; set; }
-    }
+        public List<User>? Users { get; set; }
+    }   
 }

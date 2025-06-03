@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+183c1904f7435002afa809b735180ed2dd7bf97e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00db601385a210f62f5f854e8de21c3b0310625b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeLavant-CourseWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
