@@ -17,6 +17,7 @@
 </head>
 
 <body>
+  
     <header>
         <!-- Блок с логотипом и названием -->
         <div class="logo-container">
@@ -25,22 +26,7 @@
                 <img class="img-small" src="~/icons/delavant-logo-new.png" />
             </a>
         </div>
-        <div class="overlay">
-            <ul class="admin-menu">
-                <li>
-                    <a asp-controller="Accounts" asp-action="Index">участники</a>
-                </li>
-                <li>
-                    <a asp-controller="Course" asp-action="Index">курсы</a>
-                </li>
-                <li>
-                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-                        asp-route-returnUrl="@Url.Action("Index", "Accounts", new { area = "" })">
-                        <button id="logout" type="submit" class="btn-logout admin-menu a">выйти</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
+      
         <!-- Навигационное меню -->
 
         @if (User.Identity.IsAuthenticated)
@@ -94,6 +80,25 @@
 
     </header>
 
+    <div class="overlay">
+            <ul class="admin-menu">        
+                <li>
+                    <a asp-controller="Course" asp-action="Index">курсы</a>
+                </li>
+                 <li>
+                    <a asp-controller="Accounts" asp-action="Index">участники</a>
+                </li>
+                  <li>
+                    <a>руководство</a> <!-- asp-controller="Course" asp-action="Index" -->
+                </li>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("Index", "Accounts", new { area = "" })">
+                        <button id="logout" type="submit" class="btn-logout admin-menu a">выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     <div class="main-content">
         <main role="main">
             @RenderBody()

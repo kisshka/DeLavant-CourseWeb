@@ -66,7 +66,30 @@
 }
 
 
+.two-column-container {
+  display: flex;           /* Flex-контейнер */
+  gap: 20px;               /* Расстояние между колонками */
+  width: 100%;             /* Ширина по родительскому контейнеру */
+  height: auto;            /* Автоматическая высота */
+}
 
+.column {
+  flex: 1;                 /* Колонки равномерно делят пространство */
+  display: flex;           /* Для вложенных компонентов */
+  flex-direction: column;  /* Компоненты внутри колонки вертикально */
+  gap: 10px;               /* Отступ между компонентами внутри колонки */
+}
+
+/* Стили для визуализации (можно изменить/удалить) */
+.component {
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Опционально: разные цвета для колонок */
+.left-column { padding: 10px; }
+.right-column { padding: 10px; }
 
 
 
@@ -197,9 +220,4 @@ header {
   height: 1em;
   mask-repeat: no-repeat;
   mask-size: contain;
-}
-.lable-header {
-    display: flex;
-    justify-content: space-between; /* Распределение пространства между элементами */
-    align-items: center; /* Вертикальное выравнивание элементов */
 }
