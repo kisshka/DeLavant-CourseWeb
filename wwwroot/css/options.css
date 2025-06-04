@@ -1,0 +1,87 @@
+
+.select-more{
+    height: 15rem;
+}
+.select-container {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.option {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    white-space: nowrap; /* Запрет переноса текста */
+}
+
+.option:hover {
+    background-color: #ff4757; /* Красный фон при наведении */
+    color: white; /* Белый текст при наведении */
+}
+
+.option.selected {
+    background-color: #ccc; /* Серый фон для выбранного элемента */
+    color: white; /* Белый текст для выбранного элемента */
+}
+
+.option::after {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    background-image: url("../icons/icon-open.svg"); /* Путь к иконке */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0; /* Иконка скрыта по умолчанию */
+    transition: opacity 0.3s ease;
+}
+
+.option.selected::after {
+    opacity: 1; /* Иконка видна для выбранного элемента */
+}
+
+select {
+    font-family: var(--base-font);
+    border-radius: 15px;
+    height: 30px;
+    min-width: 400px;
+    padding: 0 40px 0 10px; /* Увеличиваем правый отступ для стрелки */
+    border: 1px solid var(--primary-gray);
+    background: #fff url(./icon-down.svg) no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    appearance: none; /* Скрываем стандартную стрелку */
+    -webkit-appearance: none; /* Для Safari и Chrome */
+    -moz-appearance: none; /* Для Firefox */
+    cursor: pointer;
+    outline: none;
+   
+    font-size: 14px;
+}
+
+select:focus {
+    border: 1px solid var(--primary-gray);
+}
+
+option {
+    padding: 10px;
+    background: white;
+    color: #333;
+}
+
+option:hover {
+    background: var(--primary-gray) !important;
+    color: white !important;
+    border-radius: 5px;
+}

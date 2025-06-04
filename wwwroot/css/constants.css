@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Hero";
+  src: url("./Hero/Hero-Bold.ttf") format("truetype");
+}
+
+:root {
+  --base-font: "Hero";
+}
+html {
+  font-size: 20px;
+  font-family: var(--base-font);
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+ overflow-x: hidden;
+  box-sizing: border-box;
+}
+:root {
+  --primary-red: #e50004;
+  --secondary-red: #fac2c3;
+
+  --primary-gray: #69696c;
+  --secondary-gray: #ebebeb;
+
+  --white: #ffffff;
+  --black: #000;
+
+  --feedback-error: #edbfbb;
+  --feedback-warning: #000;
+  --feedback-success: #d6f7d0;
+}
+:root {
+  --title: 3rem;
+  --document-head: 2rem;
+  --text-basic: 1.5rem;
+  --description: 1.5rem;
+  --caption: 1rem;
+  --link: 2rem;
+  --button-text: 2rem;
+}
