@@ -1,34 +1,33 @@
 ﻿@model IEnumerable<DeLavant_CourseWeb.Models.UserBd.Area>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Список участков";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Создать новый участок</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameArea)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameArea)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdArea">Редактировать</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdArea">Удалить</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<a asp-action="Create" class="with-icon-add">добавить участок</a>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NameArea)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameArea)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdArea">Редактировать</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdArea">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

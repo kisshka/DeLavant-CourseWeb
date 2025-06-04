@@ -1,25 +1,17 @@
 @model DeLavant_CourseWeb.Models.Course
 @{
-    ViewData["Title"] = "Редактирование курса";
+    ViewData["Title"] = "Конструктор курса";
 }
 <a asp-controller="Course" asp-action="Index">Назад</a>
 <a asp-controller="Course" asp-action="Access">Далее</a>
 
-<h2>Редактирование курса</h2>
-
+<div class="content-70percent-width">
 <form method="post" asp-action="Edit">
-    <div asp-validation-summary="All"></div>
-
     <input type="hidden" asp-for="Id" />
     <div asp-validation-summary="All"></div>
-    <div class="form-group">
-        <label asp-for="Name">Название:</label>
-        <input type="text" asp-for="Name" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Описание:</label>
-        <input type="text" asp-for="Description" required />
-    </div>
+   
+    <input type="text" asp-for="Name" required />
+    <input type="text" asp-for="Description" required />
 
 @* Добавление раздела курса *@
         <div>
@@ -62,6 +54,6 @@
 
 </form>
 
-
+</div>
 
 

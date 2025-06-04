@@ -3,18 +3,26 @@
     ViewData["Title"] = "Курсы";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Курсы</h1>
-<div>
-    @foreach (var course in Model) {
-   <a asp-action="Edit" asp-route-id="@course.Id">    
-        <h2>@course.Name</h2>
-            <p>@course.Description</p>
-            <p>@course.CreatingDate</p>
-    </a>    
-    }
 
+<div>
+    <button class="btn-add">
+        <a class="with-icon-add" asp-controller="Course" asp-action="Create">создать курс</a>
+    </button>
 </div>
 
-<a asp-controller="Course" asp-action="Create" class="btn_add_element">Добавить</a>
+ <div>
+          <a href="" class="open-full">Общедоступные</a>
+        </div>
+<div class="first-top">
+    
+    @foreach (var course in Model)
+    {
+        <div class="card-item">
+            <span class="card-item-name">
+                @course.Name
+            </span>
+            <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+        </div>
+
+    }
 </div>

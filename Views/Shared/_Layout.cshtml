@@ -1,55 +1,110 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DeLavant_CourseWeb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DeLavant_CourseWeb.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>@ViewData["Title"] - DeLavant курсы</title>
+    <link rel="stylesheet" href="~/css/buttons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/constants.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/containers.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/img-styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/options.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/text-component.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/buttons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/menu-animation.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Posts" asp-action="Index">DeLavant_CourseWeb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Accounts" asp-action="Index">Пользователи</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Posts" asp-action="Index">Должность</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Areas" asp-action="Index">Участок</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Course" asp-action="Index">Курсы</a>
-                            </li>
-                        </ul>
+        <!-- Блок с логотипом и названием -->
+        <div class="logo-container">
+            <!-- Изображение-ссылка -->
+            <a class="logo-text" asp-controller="Course" asp-action="Index">
+                <img class="img-small" src="~/icons/delavant-logo-new.png" />
+            </a>
+        </div>
+        <div class="overlay">
+            <ul class="admin-menu">
+                <li>
+                    <a asp-controller="Accounts" asp-action="Index">участники</a>
+                </li>
+                <li>
+                    <a asp-controller="Course" asp-action="Index">курсы</a>
+                </li>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("Index", "Accounts", new { area = "" })">
+                        <button id="logout" type="submit" class="btn-logout admin-menu a">выйти</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- Навигационное меню -->
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="hamburger closed">
+                <div class="burger-main">
+                    <div class="burger-inner">
+                        <span class="top"></span>
+                        <span class="mid"></span>
+                        <span class="bot"></span>
                     </div>
-                }
-                <partial name="_LoginPartial" />
+                </div>
+
+                <div class="svg-main">
+                    <svg class="svg-circle">
+                        <path class="path" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="4"
+                            d="M 34 2 C 16.3 2 2 16.3 2 34 s 14.3 32 32 32 s 32 -14.3 32 -32 S 51.7 2 34 2" />
+                    </svg>
+                </div>
+                <div class="path-burger">
+                    <div class="animate-path">
+                        <div class="path-rotation"></div>
+                    </div>
+                </div>
             </div>
-        </nav>
+            @* <ul class="nav-list">
+                    <li>
+                        <a asp-controller="Accounts" asp-action="Index">Пользователи</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Posts" asp-action="Index">Должность</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Areas" asp-action="Index">Участок</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">Курсы</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                            asp-route-returnUrl="@Url.Action("Index", "Accounts", new { area = "" })">
+                            <button id="logout" type="submit"
+                                class="nav-link btn btn-link text-dark border-0">Выйти</button>
+                        </form>
+                    </li>
+                </ul> *@
+
+
+        }
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <div class="main-content">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

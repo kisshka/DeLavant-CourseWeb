@@ -1,0 +1,205 @@
+.container-welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 10vh auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.in-container-welcome {
+  height: 23rem;
+  width: 23rem;
+  background-color: var(--white);
+  border: 3px solid var(--secondary-gray);
+  border-radius: 3rem;
+  display: grid; /* Изменено на grid */
+  grid-template-rows: 90% 10%; /* 2 строки: 80% и 20% высоты */
+  padding: 2rem;
+  flex-shrink: 0;
+  overflow: hidden; /* Скрываем выходящие за пределы элементы */
+}
+.button-area {
+  grid-row: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content-area {
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.course-card-welcome {
+  text-decoration: none;
+  width: 100%;
+  margin: 5px 0;
+  border: 2px solid var(--primary-red);
+  border-radius: 1rem;
+  text-wrap: wrap;
+  font-size: var(--caption);
+  color: var(--primary-red);
+  height: 5rem;
+  overflow: hidden; /* Скрытие переполненного контента */
+  text-overflow: ellipsis; /* Добавление многоточия */
+  line-height: 1.4; /* Межстрочный интервал */
+}
+
+.main-content {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  border-radius: 8px;
+}
+.content-70percent-width
+{
+  margin: 0 auto ;
+  width: 70%;
+}
+
+
+
+
+
+
+header {
+    width: 100%;
+    background-color: #808080;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Блок с логотипом и названием */
+.logo-container {
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Стили для изображения логотипа */
+.logo-img {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  background-color: #5a5a5a; /* Заглушка для изображения */
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+/* Название сайта */
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+
+
+.content-column {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Расстояние между элементами */
+}
+.first-top {
+  margin: 1rem 0 0 0;
+  width: 100%;
+  height: 20rem;
+  overflow-y: auto;
+  border: 2px solid var(--secondary-gray);
+  border-radius: 1.5rem;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/*уменьшение окна */
+@media (max-width: 850px) {
+  .container-welcome {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .card-item {
+    flex-direction: column-reverse;
+  }
+}
+
+/* Стилизация скроллбара для WebKit (Chrome, Safari, Edge) */
+.first-top::-webkit-scrollbar {
+  width: 4px;
+}
+.first-top::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 2px;
+}
+.first-top::-webkit-scrollbar-thumb {
+  background: var(--secondary-gray);
+  border-radius: 2px;
+}
+.first-top {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-gray) #fff;
+}
+
+.card-item {
+  margin: 0.5rem 2px;
+  padding: 1rem;
+  border: 2px solid var(--primary-red);
+  border-radius: 1rem;
+  min-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.card-item-name {
+  font-size: var(--text-basic);
+  text-wrap: wrap;
+  color: var(--primary-red);
+  width: 80%;
+}
+.card-item-open {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  min-width: 12rem;
+  border: none;
+  padding: 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-red);
+  font-size: var(--text-basic);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.card-item-open::after {
+  content: "";
+  background-color: red;
+  mask-image: url("../icons/icon-open.svg");
+  margin-left: 0.5em;
+  width: 1em;
+  height: 1em;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+.lable-header {
+    display: flex;
+    justify-content: space-between; /* Распределение пространства между элементами */
+    align-items: center; /* Вертикальное выравнивание элементов */
+}
