@@ -7,20 +7,24 @@ h1 {
 }
 
 .form-group {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--text-basic);
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.2rem;
   font-weight: bold;
   color: var(--primary-red);
-  font-size: var(--caption);
 }
 
 .text-danger
 {
+
+  width: 100%;
   font-style: italic;
   font-family: 'Courier New', Courier, monospace;
   color: var(--primary-red);
@@ -28,7 +32,9 @@ label {
 
 input[type="email"],
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+select
+ {
   width: 100%; /* Занимает всю ширину form-group */
   font-family: 'Courier New', Courier, monospace;
   padding: 12px 15px;

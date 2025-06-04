@@ -16,17 +16,17 @@
 
 $(document).ready(function () {
   var Closed = false;
-  $(".admin-menu").addClass("hidden");
+  $(".overlay").addClass("hidden");
   $(".hamburger").click(function () {
     if (Closed) {
       $(this).removeClass("open");
       $(this).addClass("closed");
-      $(".admin-menu").addClass("hidden"); // Скрываем
+      $(".overlay").addClass("hidden"); // Скрываем
       Closed = false;
     } else {
       $(this).removeClass("closed");
       $(this).addClass("open");
-      $(".admin-menu").removeClass("hidden"); // Показываем
+      $(".overlay").removeClass("hidden"); // Показываем
       Closed = true;
     }
   });
