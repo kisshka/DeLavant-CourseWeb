@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Конструктор курса";
 }
+<a asp-controller="Course" asp-action="Index">Назад</a>
+<a asp-controller="Course" asp-action="Access">Далее</a>
 
 <div class="content-70percent-width">
 <form method="post" asp-action="Edit">
@@ -25,9 +27,11 @@
             @foreach( var lecture in Model.Lectures) {
                 <p>
                     <a asp-controller="Lectures" asp-action="Edit" asp-route-courseId="@Model.Id"  asp-route-lectureId="@lecture.Id">       
-                        @lecture.Name
-                        @lecture.Description
+                        @lecture.Name|
+                        @lecture.Description|
+                        @lecture.FileName|
                     </a>
+
                    <a asp-controller="Lectures" asp-action="Delete" asp-route-courseId="@Model.Id"  asp-route-lectureId="@lecture.Id">Удалить</a>
                 </p>
             }
@@ -38,17 +42,16 @@
         <p>
             @foreach( var test in Model.Tests) {
             <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@Model.Id" asp-route-testId="@test.Id">  
-                @test.Name
-                @test.Description
+                @test.Name|
+                @test.Description|
             </a>
             <a asp-controller="Tests" asp-action="Delete" asp-route-courseId="@Model.Id"  asp-route-testId="@test.Id">Удалить</a>
 
             }
         </p>
     }
-
-    <a asp-controller="Course" asp-action="Index">Назад</a>
     <button type="submit">Сохранить</button>
+
 </form>
 
 </div>

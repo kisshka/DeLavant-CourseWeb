@@ -21,7 +21,13 @@
         <input type="text" asp-for="Description" required />
     </div>
 
+    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Один ответ|</a>
+    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Несколько ответов|</a>
+    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Последовательность действий|</a>
+    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Развернутый ответ</a>
+
+<p></p>
 @* Добавление раздела курса *@
-    <a asp-controller="Course" asp-action="Index">Назад</a>
+    <a asp-controller="Course" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Назад</a>
     <button type="submit">Сохранить</button>
 </form>

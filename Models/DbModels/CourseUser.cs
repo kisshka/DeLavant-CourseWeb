@@ -12,8 +12,8 @@ public class CourseUser
         public string? Name { get; set; }
         public string? Patronimyc { get; set; }
         public string? Email { get; set; }
+        //Список отделов
         public string? Department { get; set; }
-        public string? Post { get; set; }
-        public string? CourseId { get; set; }
+        public List<string>? Posts { get; set; }
         public List<CompletedTest>? CompletedTests { get; set; }      
     }
