@@ -59,7 +59,7 @@ namespace DeLavant_CourseWeb.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RegisterInputModel inputUser)
+        public async Task<IActionResult> Create(RegisterInputViewModel inputUser)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +140,7 @@ namespace DeLavant_CourseWeb.Controllers
             }
 
             // Маппируем данные пользователя в RegisterInputModel
-            var registerInputModel = new EditUsserModel
+            var registerInputModel = new EditUserViewModel
             {
                 Email = user.Email,
                 UserSurName = user.UserSurName,

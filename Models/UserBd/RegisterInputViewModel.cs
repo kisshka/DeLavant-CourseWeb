@@ -2,7 +2,7 @@
 
 namespace DeLavant_CourseWeb.Models.UserBd
 {
-    public class RegisterInputModel
+    public class RegisterInputViewModel
     {
 
         [Required(ErrorMessage = "Данное поле обязательно для заполнения")]
