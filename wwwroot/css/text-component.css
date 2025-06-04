@@ -1,0 +1,93 @@
+html {
+  font-size: 15px;
+  font-family: var(--base-font);
+}
+h1 {
+  font-size: var(--title);
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--primary-red);
+  font-size: var(--caption);
+}
+
+.text-danger
+{
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--primary-red);
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  width: 100%; /* Занимает всю ширину form-group */
+  font-family: 'Courier New', Courier, monospace;
+  padding: 12px 15px;
+  border: 2px solid var(--secondary-gray);
+  border-radius: 1rem;
+  font-size: 16px;
+  color: var(--primary-gray);
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  &:focus {
+    outline: none;
+    border-color: var(--secondary-red);
+    font-family: 'Courier New', Courier, monospace;
+  }
+}
+
+
+.open-full {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-gray);
+  font-size: var(--link);
+}
+.open-full::after {
+  content: "";
+  background-image: url("../icons/icon-open.svg");
+  margin-left: 0.5em;
+  width: 1em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.title {
+  font-size: var(--title);
+  width: 100%;
+}
+.title-left {
+  text-align: left;
+}
+.title-right {
+  text-align: right;
+}
+.title-center {
+  text-align: center;
+}
+
+.base-text {
+  /* сверху | справа | снизу | слева */
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  color: var(--primary-red);
+  font-size: var(--text-basic);
+  &::selection {
+    background-color: var(--primary-red);
+    color: var(--white);
+  }
+}

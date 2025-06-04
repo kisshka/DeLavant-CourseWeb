@@ -1,0 +1,94 @@
+button {
+  font-family: var(--base-font);
+}
+
+.btn-nav {
+  cursor: pointer;
+  font-size: var(--button-text);
+  display: inline-flex; /* Изменено на flex для лучшего выравнивания */
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 0;
+  white-space: nowrap;
+  border: none;
+  border-radius: 50px;
+  background-color: white;
+  vertical-align: middle; /* Выравнивание по вертикали */
+}
+
+.next {
+  color: var(--primary-red);
+}
+
+.next::after {
+  content: "";
+  display: inline-block; /* Блочное отображение */
+  background: url("../icons/icon-next.svg") no-repeat center;
+  background-size: contain; /* Масштабирование иконки */
+  width: 1em;
+  height: 1em;
+  margin-left: 0.1em;
+  vertical-align: middle;
+}
+
+.back {
+  color: var(--primary-gray);
+}
+
+.back::before {
+  content: "";
+  display: inline-block; /* Блочное отображение */
+  background: url("../icons/icon-back.svg") no-repeat center;
+  background-size: contain; /* Масштабирование иконки */
+  width: 1em;
+  height: 1em;
+  margin-right: 0.1em;
+  vertical-align: middle;
+}
+
+.btn-red-background {
+  display: inline-block;
+  background: white;
+  font-size: var(--button-text);
+  padding: 5px 40px;
+  border: none;
+  border-radius: 40rem;
+  color: var(--primary-red);
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
+  transition: 0.5s ease, color 0.5s ease;
+}
+.btn-red-background:hover {
+  background: var(--primary-red);
+  color: white;
+}
+
+.btn-add {
+  border: 2px solid var(--primary-red);
+  border-radius: 1rem;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  background-color: white;
+  margin: 3rem 0;
+}
+.with-icon-add {
+  font-size: var(--button-text);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-red);
+}
+.with-icon-add::before {
+  content: "";
+  background-image: url("../icons/icon-add.svg");
+  margin-right: 0.5em;
+  width: 1em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
