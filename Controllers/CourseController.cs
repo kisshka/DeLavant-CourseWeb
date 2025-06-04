@@ -42,6 +42,7 @@ namespace DeLavant_CourseWeb.Controllers
         try
         {
             course.CreatingDate = DateOnly.FromDateTime(DateTime.Today);
+            course.AccessTag = "Hidden";
             var coursesCollection = _database.GetCollection<Course>("Courses");
             await coursesCollection.InsertOneAsync(course);
             return RedirectToAction(nameof(Index));
@@ -70,7 +71,7 @@ namespace DeLavant_CourseWeb.Controllers
         }
         else
         {
-            return NotFound(); // Курс не найден
+            return NotFound();
         }
     }
 
@@ -144,5 +145,12 @@ namespace DeLavant_CourseWeb.Controllers
 
             return RedirectToAction(nameof(Edit), new { id });
         }
+
+
+        public IActionResult Access()
+        {   
+            return View();
+        }
+
     }
 }
