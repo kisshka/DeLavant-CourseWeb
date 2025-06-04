@@ -7,24 +7,12 @@
       "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\models\\userbd\\registerinputmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:models\\userbd\\registerinputmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\accounts\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\accounts\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\accounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\accounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\accounts\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\accounts\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\models\\userbd\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:models\\userbd\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\models\\userbd\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:models\\userbd\\area.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -67,39 +55,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RegisterInputModel.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\RegisterInputModel.cs",
-              "RelativeDocumentMoniker": "Models\\UserBd\\RegisterInputModel.cs",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\RegisterInputModel.cs",
-              "RelativeToolTip": "Models\\UserBd\\RegisterInputModel.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwCEAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T10:11:03.094Z",
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Accounts\\Delete.cshtml",
+              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Accounts\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T05:39:06.556Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\User.cs",
-              "RelativeDocumentMoniker": "Models\\UserBd\\User.cs",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\User.cs",
-              "RelativeToolTip": "Models\\UserBd\\User.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T08:19:32.839Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Area.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\Area.cs",
-              "RelativeDocumentMoniker": "Models\\UserBd\\Area.cs",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Models\\UserBd\\Area.cs",
-              "RelativeToolTip": "Models\\UserBd\\Area.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T08:09:25.898Z"
             },
             {
               "$type": "Document",
@@ -109,22 +73,10 @@
               "RelativeDocumentMoniker": "Views\\Accounts\\Index.cshtml",
               "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Index.cshtml",
               "RelativeToolTip": "Views\\Accounts\\Index.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAD4AAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAEYAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-03T05:58:45.631Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Accounts\\Edit.cshtml",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Accounts\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T05:58:22.82Z"
             },
             {
               "$type": "Document",
@@ -134,7 +86,7 @@
               "RelativeDocumentMoniker": "Controllers\\AccountsController.cs",
               "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Controllers\\AccountsController.cs",
               "RelativeToolTip": "Controllers\\AccountsController.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAmwBwAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAAwBwAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T05:57:10.338Z",
               "EditorCaption": ""

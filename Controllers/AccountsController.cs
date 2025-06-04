@@ -166,7 +166,7 @@ namespace DeLavant_CourseWeb.Controllers
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, EditUsserModel editUser)
+        public async Task<IActionResult> Edit(string id, EditUserViewModel editUser)
         {
             if (!ModelState.IsValid)
             {
