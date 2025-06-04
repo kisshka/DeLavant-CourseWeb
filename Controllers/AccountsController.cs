@@ -63,6 +63,10 @@ namespace DeLavant_CourseWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (inputUser.SelectedAreaId == 0)
+                {
+                    inputUser.SelectedAreaId = null;
+                }
                 var user = new User
                 {
                     UserSurName = inputUser.UserSurName,
@@ -118,24 +122,99 @@ namespace DeLavant_CourseWeb.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = _context.Users
+                .Include(p => p.Posts)
+                .Include(a => a.Areas)
+                .FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Маппируем данные пользователя в RegisterInputModel
+            var registerInputModel = new EditUsserModel
+            {
+                Email = user.Email,
+                UserSurName = user.UserSurName,
+                UserName = user.Name,
+                UserFatherName = user.UserFatherName,
+                SelectedPostIds = user.Posts.Select(p => p.IdPost).Cast<int?>().ToList(),
+                SelectedAreaId = user.IdArea ?? 0
+            };
+
+            ViewBag.Posts = _context.Posts.Select(p => new SelectListItem
+            {
+                Value = p.IdPost.ToString(),
+                Text = p.Title
+            }).OrderBy(p => p.Text).ToList();
+
+            var areas = _context.Areas.OrderBy(a => a.NameArea).ToList();
+            areas.Insert(0, new Area { IdArea = 0, NameArea = "Без участка" });
+            ViewBag.Areas = new SelectList(areas, "IdArea", "NameArea");
+
+            return View(registerInputModel); // Передаем новую модель представления
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, EditUsserModel editUser)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(editUser);
             }
-            catch
+
+            var user = await _context.Users.Include(u => u.Posts).SingleOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
             {
-                return View();
+                return NotFound();
             }
+
+            // Обновляем поля пользователя из входящей модели
+            user.UserSurName = editUser.UserSurName;
+            user.Name = editUser.UserName;
+            user.UserFatherName = editUser.UserFatherName;
+            user.Email = editUser.Email;
+            if (editUser.SelectedAreaId == 0)
+            {
+                user.IdArea = null;
+            }
+            else
+            {
+                user.IdArea = editUser.SelectedAreaId;
+            }
+
+
+            // Удаляем старые связи с должностями и добавляем новые
+            user.Posts.Clear();
+            if (editUser.SelectedPostIds != null && editUser.SelectedPostIds.Any())
+            {
+                foreach (var postId in editUser.SelectedPostIds.Where(id => id.HasValue))
+                {
+                    var post = await _context.Posts.FindAsync(postId.Value);
+                    if (post != null)
+                    {
+                        user.Posts.Add(post);
+                    }
+                }
+            }
+
+            
+
+            // Сохраняем изменения
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index)); // Перенаправление на страницу пользователей
         }
 
         // GET: UserController/Delete/5
