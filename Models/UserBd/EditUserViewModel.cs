@@ -2,7 +2,7 @@
 
 namespace DeLavant_CourseWeb.Models.UserBd
 {
-    public class EditUsserModel
+    public class EditUserViewModel
     {
         public string Id { get; set; }
 

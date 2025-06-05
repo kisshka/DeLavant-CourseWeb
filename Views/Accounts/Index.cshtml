@@ -2,23 +2,25 @@
 @{
     ViewData["Title"] = "Список участников";
 }
-<a asp-action="Create" class="with-icon-add">создать участника</a>
-<div>
-  <a href="" class="open-full">Водители</a>
-</div>
-<div class="first-top">
-  @foreach (var item in Model) {
-  <div class="card-item">
-    <span class="card-item-name">
-      @Html.DisplayFor(modelItem => item.UserSurName) 
-      @Html.DisplayFor(modelItem => item.Name) 
-      @Html.DisplayFor(modelItem => item.UserFatherName)
-      @if
-      (item.Areas != null) { @item.Areas.NameArea } 
-      else { <span>не закреплён за участком</span> }
-    </span>
-    <a class="card-item-open" asp-action="Edit" asp-route-id="@item.Id">просмотр</a>
+<div class="content-70percent-width">
+  <a asp-action="Create" class="with-icon-add">создать участника</a>
+  <div>
+    <a href="" class="open-full">Водители</a>
   </div>
+  <div class="first-top">
+    @foreach (var item in Model) {
+    <div class="card-item">
+      <span class="card-item-name">
+        @Html.DisplayFor(modelItem => item.UserSurName) 
+        @Html.DisplayFor(modelItem => item.Name) 
+        @Html.DisplayFor(modelItem => item.UserFatherName)
+        @if
+        (item.Areas != null) { @item.Areas.NameArea } 
+        else { <span>не закреплён за участком</span> }
+      </span>
+      <a class="card-item-open" asp-action="Edit" asp-route-id="@item.Id">просмотр</a>
+    </div>
 
-  }
+    }
+  </div>
 </div>

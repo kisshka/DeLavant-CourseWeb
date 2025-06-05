@@ -35,9 +35,13 @@ namespace DeLavant_CourseWeb.Controllers
         }
 
         // GET: UserController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var user = _context.Users
+                .Include(p => p.Posts)
+                .Include(a => a.Areas)
+                .FirstOrDefault(u => u.Id == id);
+            return View(user);
         }
 
         // GET: UserController/Create
@@ -59,7 +63,7 @@ namespace DeLavant_CourseWeb.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RegisterInputModel inputUser)
+        public async Task<IActionResult> Create(RegisterInputViewModel inputUser)
         {
             if (ModelState.IsValid)
             {
@@ -140,7 +144,7 @@ namespace DeLavant_CourseWeb.Controllers
             }
 
             // Маппируем данные пользователя в RegisterInputModel
-            var registerInputModel = new EditUsserModel
+            var registerInputModel = new EditUserViewModel
             {
                 Email = user.Email,
                 UserSurName = user.UserSurName,
@@ -166,7 +170,7 @@ namespace DeLavant_CourseWeb.Controllers
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, EditUsserModel editUser)
+        public async Task<IActionResult> Edit(string id, EditUserViewModel editUser)
         {
             if (!ModelState.IsValid)
             {
