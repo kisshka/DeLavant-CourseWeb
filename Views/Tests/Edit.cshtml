@@ -21,10 +21,10 @@
         <input type="text" asp-for="Description" required />
     </div>
 
-    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Один ответ|</a>
-    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Несколько ответов|</a>
-    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Последовательность действий|</a>
-    <a asp-controller="Test" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Развернутый ответ</a>
+    <a asp-controller="OneOptionAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Один ответ|</a>
+    <a asp-controller="ManyOptionsAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Несколько ответов|</a>
+    <a asp-controller="StepSequenceAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Последовательность действий|</a>
+    <a asp-controller="ExtendedResponseAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Развернутый ответ</a>
 
 <p></p>
 @* Добавление раздела курса *@
