@@ -1,69 +1,93 @@
-﻿@using DeLavant_CourseWeb.Models.UserBd;
+@using DeLavant_CourseWeb.Models.UserBd;
 @model DeLavant_CourseWeb.Models.UserBd.RegisterInputViewModel;
 
+<div class="content-70percent-width">
+<div>
+  <a asp-action="Index">Вернуться назад</a>
+</div>
 
 <h1 class="title title-center">Создание участника</h1>
-<div class="content-70percent-width">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <div class="lable-header">
-                    <label asp-for="Email" class="control-label"></label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <input asp-for="Email" class="form-control" />
-            </div>
-            <div class="form-group">
-                <div class="lable-header">
-                    <label asp-for="UserSurName" class="control-label"></label>
-                    <span asp-validation-for="UserSurName" class="text-danger"></span>
-                </div>
-                <input asp-for="UserSurName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <div class="lable-header">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-                <input asp-for="UserName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <div class="lable-header">
-                    <label asp-for="UserFatherName" class="control-label"></label>
-                    <span asp-validation-for="UserFatherName" class="text-danger"></span>
-                </div>
-                <input asp-for="UserFatherName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Должность:</label>
-                <input type="text" id="search-post" class="form-control" placeholder="Поиск..." onkeyup="filterCategories()" autocomplete="off" />
-                <select class="select-more" asp-for="SelectedPostIds" id="post-list" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)" multiple></select>
-                <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
-                <a asp-controller="Posts" asp-action="Create" class="with-icon-add">Добавить должность</a>
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedAreaId" class="control-label">Участок:</label>
-                <select asp-for="SelectedAreaId" class="form-control" asp-items="@(ViewBag.Areas)"></select>
-                <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
-                <a asp-controller="Areas" asp-action="Create" class="with-icon-add">Добавить участок</a>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+  <form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="two-column-container">
+      <div class="column left-column">
+        <div class="form-group">
+          <label asp-for="UserSurName"></label>
+          <span asp-validation-for="UserSurName" class="text-danger"></span>
+          <input asp-for="UserSurName" />
+        </div>
+
+        <div class="form-group">
+          <label asp-for="UserName"></label>
+          <span asp-validation-for="UserName" class="text-danger"></span>
+          <input asp-for="UserName" />
+        </div>
+
+        <div class="form-group">
+          <label asp-for="UserFatherName"></label>
+          <span asp-validation-for="UserFatherName" class="text-danger"></span>
+          <input asp-for="UserFatherName" />
+        </div>
+
+        <div class="form-group">
+          <label asp-for="Email"></label>
+          <span asp-validation-for="Email" class="text-danger"></span>
+
+          <input asp-for="Email" />
+        </div>
+
+        <div class="form-group">
+          <label asp-for="Password"></label>
+          <span asp-validation-for="Password" class="text-danger"></span>
+          <input asp-for="Password" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label asp-for="ConfirmPassword"></label>
+          <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+          <input asp-for="ConfirmPassword" />
+        </div>
+
+      </div>
+
+      <div class="column right-column">
+        <div class="form-group">
+          <label asp-for="SelectedPostIds"></label>
+          <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
+          <input
+            type="text"
+            id="search-post"
+            placeholder="Поиск должности"
+            onkeyup="filterCategories()"
+            autocomplete="off"
+          />
+          <select
+            class="select-more"
+            asp-for="SelectedPostIds"
+            id="post-list"
+            asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)"
+            multiple
+          ></select>
+        </div>
+
+        <div class="form-group">
+          <label asp-for="SelectedAreaId"></label>
+          <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
+          <select
+            asp-for="SelectedAreaId"
+            asp-items="@(ViewBag.Areas)"
+          ></select>
+        </div>
+        
+      </div>
     </div>
+
+    
+      <button type="submit" value="" class="btn-add" >
+        <span class="with-icon-user-add">создать участника</span>
+      </button>
+ 
+  </form>
 </div>
 
-<div>
-    <a asp-action="Index">Вернуться назад</a>
-</div>

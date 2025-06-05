@@ -3,65 +3,22 @@
     ViewData["Title"] = "Список участников";
 }
 <a asp-action="Create" class="with-icon-add">создать участника</a>
+<div>
+  <a href="" class="open-full">Водители</a>
+</div>
+<div class="first-top">
+  @foreach (var item in Model) {
+  <div class="card-item">
+    <span class="card-item-name">
+      @Html.DisplayFor(modelItem => item.UserSurName) 
+      @Html.DisplayFor(modelItem => item.Name) 
+      @Html.DisplayFor(modelItem => item.UserFatherName)
+      @if
+      (item.Areas != null) { @item.Areas.NameArea } 
+      else { <span>не закреплён за участком</span> }
+    </span>
+    <a class="card-item-open" asp-action="Edit" asp-route-id="@item.Id">просмотр</a>
+  </div>
 
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th> Фамилия </th>
-                <th> Имя </th>
-                <th> Отчество </th>
-                <th> Должность </th>
-                <th> Участок </th>
-                <th> E-mail </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserSurName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserFatherName)
-                    </td>
-                    <td>
-                        @if (item.Posts != null && item.Posts.Any())
-                        {
-                            var titles = item.Posts.Select(p => p.Title).ToArray();
-                            if (titles.Length > 1)
-                            {
-                                @string.Join("/", titles)
-                            }
-                            else
-                            {
-                                @titles.FirstOrDefault()
-                            }
-                        }
-                        else
-                        {
-                            <span>не назначена</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.Areas != null)
-                        {
-                            @item.Areas.NameArea
-                        }
-                        else
-                        {
-                            <span>не закреплён за участком</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+  }
 </div>

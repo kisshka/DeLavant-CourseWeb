@@ -1,6 +1,7 @@
 
 .select-more{
-    height: 15rem;
+    margin-top: 1rem;
+    height: auto;
 }
 .select-container {
     width: 100%;
@@ -51,24 +52,6 @@
     opacity: 1; /* Иконка видна для выбранного элемента */
 }
 
-select {
-    font-family: var(--base-font);
-    border-radius: 15px;
-    height: 30px;
-    min-width: 400px;
-    padding: 0 40px 0 10px; /* Увеличиваем правый отступ для стрелки */
-    border: 1px solid var(--primary-gray);
-    background: #fff url(./icon-down.svg) no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
-    appearance: none; /* Скрываем стандартную стрелку */
-    -webkit-appearance: none; /* Для Safari и Chrome */
-    -moz-appearance: none; /* Для Firefox */
-    cursor: pointer;
-    outline: none;
-   
-    font-size: 14px;
-}
 
 select:focus {
     border: 1px solid var(--primary-gray);

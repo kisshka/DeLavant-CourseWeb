@@ -50,34 +50,56 @@
 }
 
 .main-content {
-  width: 90%;
-  max-width: 1000px;
+  width: 100%;
   margin: 30px auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: white;
+}
+.content-70percent-width {
+  margin: 0 auto;
+  width: 50%;
+  min-width: 700px;
+}
+
+.two-column-container {
+  display: flex; /* Flex-контейнер */
+  gap: 20px; /* Расстояние между колонками */
+  width: 100%; /* Ширина по родительскому контейнеру */
+  height: auto; /* Автоматическая высота */
+}
+
+.column {
+  flex: 1; /* Колонки равномерно делят пространство */
+  display: flex; /* Для вложенных компонентов */
+  flex-direction: column; /* Компоненты внутри колонки вертикально */
+  gap: 10px; /* Отступ между компонентами внутри колонки */
+}
+
+/* Стили для визуализации (можно изменить/удалить) */
+.component {
+  padding: 15px;
   border-radius: 8px;
-}
-.content-70percent-width
-{
-  margin: 0 auto ;
-  width: 70%;
+  border: 1px solid #ddd;
 }
 
-
-
-
-
+/* Опционально: разные цвета для колонок */
+.left-column {
+  padding: 10px;
+}
+.right-column {
+  padding: 10px;
+}
 
 header {
-    width: 100%;
-    background-color: #808080;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
+  width: 100%;
+  background-color: #808080;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 /* Блок с логотипом и названием */
@@ -108,8 +130,6 @@ header {
   color: white;
   text-decoration: none;
 }
-
-
 
 .content-column {
   width: 60%;
@@ -198,8 +218,111 @@ header {
   mask-repeat: no-repeat;
   mask-size: contain;
 }
-.lable-header {
-    display: flex;
-    justify-content: space-between; /* Распределение пространства между элементами */
-    align-items: center; /* Вертикальное выравнивание элементов */
+
+.course-element {
+  width: 100%; /* Ширина 100% */
+  display: flex; /* Элементы внутри расположены в строку */
+  gap: 10px; /* Отступы между контейнерами 20px */
+  min-height: 3rem; /* Минимальная высота 3rem */
+  align-items: center; /* Выравнивание элементов по верхнему краю */
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.course-element-info {
+  width: 90%; /* Занимает 80% ширины */
+  height: auto; /* Высота зависит от компонентов внутри */
+  border: 2px solid var(--secondary-red); /* Рамка 1px */
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column; /* Элементы внутри в колонку */
+  padding: 10px; /* Отступы внутри контейнера */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  text-decoration: none;
+}
+
+.course-element-name {
+  width: 100%; /* Занимает 100% ширину */
+  border: 2px solid var(--primary-red); /* Рамка 1px */
+  border-radius: 0.5rem;
+  height: auto; /* Высота увеличивается, если текст не умещается */
+  padding: 5px; /* Отступы внутри */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  word-wrap: break-word; /* Перенос текста */
+  color: var(--primary-red);
+  font-size: 1.25rem;
+}
+
+.course-element-description {
+  width: 100%; /* Занимает 100% ширину */
+  height: auto; /* Высота зависит от текста */
+  padding: 5px; /* Отступы внутри */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  overflow: hidden; /* Обрезаем текст, если не умещается */
+  text-overflow: ellipsis; /* Многоточие, если текст не умещается */
+  white-space: nowrap; /* Текст в одну строку */
+  color: var(--primary-gray);
+}
+
+.course-element-delete {
+  width: 2rem; /* Ширина 1rem */
+  height: 2rem; /* Высота 1rem */
+  background-image: url("../icons/icon-delete.svg"); /* Задний фон - изображение */
+  background-size: cover; /* Изображение занимает всю область */
+  filter: brightness(0.8); /* Применяем цвет к изображению */
+}
+
+.course-element-UD {
+  width: 2rem; /* Ширина 1rem */
+  height: 2rem; /* Высота 1rem */
+  background-image: url("../icons/icon-up-down.svg"); /* Задний фон - изображение */
+  background-size: cover; /* Изображение занимает всю область */
+  filter: brightness(0.8); /* Применяем цвет к изображению */
+}
+
+/*для полей которые должны автоматически менять высоту*/
+textarea {
+  outline: none;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  font-family: var(--base-font);
+  width: 100%;
+   align-items: center;
+}
+.autoresize {
+  resize: none;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.course-name {
+  font-size: 3rem;
+  border: 2px solid var(--secondary-red);
+  color: var(--primary-red);
+  text-align: center;
+}
+.course-name:focus {
+  border: 2px solid var(--primary-red);
+  box-shadow: 0px 0px 46px 5px rgba(233, 80, 119, 0.2);
+
+  -webkit-box-shadow: 0px 0px 46px 5px rgba(233, 80, 119, 0.2);
+  -moz-box-shadow: 0px 0px 46px 5px rgba(233, 80, 119, 0.2);
+}
+
+.course-description {
+  color: var(--primary-gray);
+
+   padding: 0.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--secondary-gray);
+}
+.course-description:focus {
+  border: 2px solid var(--primary-gray);
+ 
+
+
+  -webkit-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
+-moz-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
+box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
 }

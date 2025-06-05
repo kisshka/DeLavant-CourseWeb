@@ -92,3 +92,21 @@ button {
   background-position: center;
   background-size: contain;
 }
+
+.with-icon-user-add {
+  font-size: var(--button-text);
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primary-red);
+}
+.with-icon-user-add::before {
+  content: "";
+  background-image: url("../icons/icon-user-add.svg");
+  margin-right: 0.5em;
+  width: 1em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
