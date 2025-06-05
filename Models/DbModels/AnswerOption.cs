@@ -8,5 +8,5 @@ public class AnswerOption {
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
     public string? Text { get; set; }
-    bool? IsTrue { get; set; }
+    public bool? IsTrue { get; set; }
 }
