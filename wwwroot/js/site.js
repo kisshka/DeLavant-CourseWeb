@@ -31,3 +31,27 @@ $(document).ready(function () {
     }
   });
 });
+
+function autoResize(elem) {
+    elem.style.height = 'auto';
+    elem.style.height = (elem.scrollHeight-7) + 'px';
+}
+
+document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          // Удаляем активный класс у всех элементов
+          document.querySelectorAll(".menu-item").forEach((el) => {
+            el.classList.remove("active");
+          });
+
+          // Добавляем активный класс текущему элементу
+          this.classList.add("active");
+
+          // Перемещаем красный фон
+          const index = parseInt(this.dataset.index);
+          const highlight = document.querySelector(".highlight");
+          highlight.style.transform = `translateY(-50%) translateX(${
+            index * 100
+          }%)`;
+        });
+      });
