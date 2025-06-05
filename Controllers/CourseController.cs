@@ -61,7 +61,7 @@ namespace DeLavant_CourseWeb.Controllers
         var coursesCollection = _database.GetCollection<Course>("Courses");
         var objectId = new ObjectId(id);
         var course = coursesCollection.Find(c => c.Id == objectId.ToString()).FirstOrDefault();
-
+        
         if (course != null)
         {
             var lectures = course.Lectures;
@@ -109,7 +109,7 @@ namespace DeLavant_CourseWeb.Controllers
             {
                 editedCourse.Lectures = new List<Lecture>();
             }
-           editedCourse.Lectures.Add(newLecture);
+                editedCourse.Lectures.Add(newLecture);
 
                 coursesCollection.UpdateOne(
                 c => c.Id == objectId.ToString(),
