@@ -25,55 +25,55 @@ namespace DeLavant_CourseWeb.Controllers
             return View(courses);
         }
 
-//Добавление нового курса
-      public IActionResult Create()
+        //Добавление нового курса
+        public IActionResult Create()
         {   
             return View();
         }
 
-    [HttpPost]
-    public async Task<IActionResult> Create(Course course)
-    {
-        if (!ModelState.IsValid)
+        [HttpPost]
+        public async Task<IActionResult> Create(Course course)
         {
-            return View(course);
+            if (!ModelState.IsValid)
+            {
+                return View(course);
+            }
+
+            try
+            {
+                course.CreatingDate = DateOnly.FromDateTime(DateTime.Today);
+                course.AccessTag = "Hidden";
+                var coursesCollection = _database.GetCollection<Course>("Courses");
+                await coursesCollection.InsertOneAsync(course);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при сохранении курса.");
+                ModelState.AddModelError("", "Возникла ошибка при создании курса.");
+                return View(course);
+            }
         }
 
-        try
+        //Изменение курса и добавление в него разделов
+        public IActionResult Edit(string id)
         {
-            course.CreatingDate = DateOnly.FromDateTime(DateTime.Today);
-            course.AccessTag = "Hidden";
             var coursesCollection = _database.GetCollection<Course>("Courses");
-            await coursesCollection.InsertOneAsync(course);
-            return RedirectToAction(nameof(Index));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Ошибка при сохранении курса.");
-            ModelState.AddModelError("", "Возникла ошибка при создании курса.");
-            return View(course);
-        }
-    }
+            var objectId = new ObjectId(id);
+            var course = coursesCollection.Find(c => c.Id == objectId.ToString()).FirstOrDefault();
 
-    //Изменение курса и добавление в него разделов
-    public IActionResult Edit(string id)
-    {
-        var coursesCollection = _database.GetCollection<Course>("Courses");
-        var objectId = new ObjectId(id);
-        var course = coursesCollection.Find(c => c.Id == objectId.ToString()).FirstOrDefault();
+            if (course != null)
+            {
+                var lectures = course.Lectures;
+                var tests = course.Tests;
 
-        if (course != null)
-        {
-            var lectures = course.Lectures;
-            var tests = course.Tests;
-
-            return View(course);
+                return View(course);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
-        else
-        {
-            return NotFound();
-        }
-    }
 
         [HttpPost]
         public IActionResult Edit(string id, Course course)
@@ -146,11 +146,42 @@ namespace DeLavant_CourseWeb.Controllers
             return RedirectToAction(nameof(Edit), new { id });
         }
 
-
-        public IActionResult Access()
+        public IActionResult Access(string id)
         {   
+            ViewBag.SelectedId = id;
             return View();
         }
+        [HttpPost]
+        public IActionResult Access(string accessType, string id)
+        {
+            switch(accessType)
+            {
+                case "Common":
+                    return PartialView("_CommonAccess");
+                    
+                case "Group":
+                    return PartialView("_GroupAccess");
+                    
+                case "Individual":
+                    return PartialView("_IndividualAccess");
+                    
+                case "Hidden":
+                    return PartialView("_HiddenAccess");
 
+                default:
+                    return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Save(string SelectedAccessType, string id)
+        {
+            var coursesCollection = _database.GetCollection<Course>("Courses");
+            var objectId = new ObjectId(id);
+            var editedCourse = coursesCollection.Find(c => c.Id == objectId.ToString()).FirstOrDefault();
+            editedCourse.AccessTag = SelectedAccessType;
+            coursesCollection.ReplaceOne(c => c.Id == objectId.ToString(), editedCourse);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

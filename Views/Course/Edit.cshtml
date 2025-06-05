@@ -3,7 +3,7 @@
     ViewData["Title"] = "Конструктор курса";
 }
 <a asp-controller="Course" asp-action="Index">Назад</a>
-<a asp-controller="Course" asp-action="Access">Далее</a>
+<a asp-controller="Course" asp-action="Access" asp-route-id="@Model.Id">Далее</a>
 
 <div class="content-70percent-width">
 <form method="post" asp-action="Edit">
@@ -50,6 +50,8 @@
             }
         </p>
     }
+    <h3>Доступ:</h3>
+    <p>@Model.AccessTag</p>
     <button type="submit">Сохранить</button>
 
 </form>

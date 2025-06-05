@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\Visual Studio\\DeLavant-CourseWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\course\\access.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\course\\access.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\accounts\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\accounts\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\accounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\accounts\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|d:\\visual studio\\delavant-courseweb\\views\\course\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAD109B7-C845-4D85-A8D2-19DFDC8960D4}|DeLavant-CourseWeb.csproj|solutionrelative:views\\course\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,41 +54,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Delete.cshtml",
-              "RelativeDocumentMoniker": "Views\\Accounts\\Delete.cshtml",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Delete.cshtml",
-              "RelativeToolTip": "Views\\Accounts\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAHAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Course\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Course\\Edit.cshtml",
+              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Course\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Course\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-04T05:39:06.556Z",
+              "WhenOpened": "2025-06-05T07:24:43.805Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Accounts\\Index.cshtml",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Accounts\\Index.cshtml",
-              "RelativeToolTip": "Views\\Accounts\\Index.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAEYAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T05:58:45.631Z",
+              "DocumentIndex": 1,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CourseController.cs",
+              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "Controllers\\CourseController.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAIwLcAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T06:58:50.48Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AccountsController.cs",
-              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Controllers\\AccountsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AccountsController.cs",
-              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Controllers\\AccountsController.cs",
-              "RelativeToolTip": "Controllers\\AccountsController.cs",
-              "ViewState": "AgIAAM0AAAAAAAAAAAAAwBwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T05:57:10.338Z",
+              "Title": "Access.cshtml",
+              "DocumentMoniker": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Course\\Access.cshtml",
+              "RelativeDocumentMoniker": "Views\\Course\\Access.cshtml",
+              "ToolTip": "D:\\Visual Studio\\DeLavant-CourseWeb\\Views\\Course\\Access.cshtml",
+              "RelativeToolTip": "Views\\Course\\Access.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-05T06:47:47.599Z",
               "EditorCaption": ""
             }
           ]

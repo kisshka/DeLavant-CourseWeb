@@ -35,9 +35,13 @@ namespace DeLavant_CourseWeb.Controllers
         }
 
         // GET: UserController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var user = _context.Users
+                .Include(p => p.Posts)
+                .Include(a => a.Areas)
+                .FirstOrDefault(u => u.Id == id);
+            return View(user);
         }
 
         // GET: UserController/Create

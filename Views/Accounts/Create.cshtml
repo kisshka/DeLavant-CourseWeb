@@ -39,13 +39,13 @@
                 <input type="text" id="search-post" class="form-control" placeholder="Поиск..." onkeyup="filterCategories()" autocomplete="off" />
                 <select class="select-more" asp-for="SelectedPostIds" id="post-list" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)" multiple></select>
                 <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
+                <a asp-controller="Posts" asp-action="Create" class="with-icon-add">Добавить должность</a>
             </div>
             <div class="form-group">
                 <label asp-for="SelectedAreaId" class="control-label">Участок:</label>
-                <select asp-for="SelectedAreaId" class="form-control" asp-items="@(ViewBag.Areas)">
-                  
-                </select>
+                <select asp-for="SelectedAreaId" class="form-control" asp-items="@(ViewBag.Areas)"></select>
                 <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
+                <a asp-controller="Areas" asp-action="Create" class="with-icon-add">Добавить участок</a>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>

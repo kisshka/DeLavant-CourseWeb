@@ -34,6 +34,9 @@
                     <a asp-controller="Course" asp-action="Index">курсы</a>
                 </li>
                 <li>
+                    <a asp-controller="Posts" asp-action="Index">Должности</a>
+                </li>
+                <li>
                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
                         asp-route-returnUrl="@Url.Action("Index", "Accounts", new { area = "" })">
                         <button id="logout" type="submit" class="btn-logout admin-menu a">выйти</button>
