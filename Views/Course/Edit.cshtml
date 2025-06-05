@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <a asp-controller="Course" asp-action="Access" class="btn-nav next">настройки</a>
+  <a asp-controller="Course" asp-action="Access" asp-route-id="@Model.Id" class="btn-nav next">настройки</a>
 </div>
 
 
@@ -126,6 +126,8 @@
       }
     </p>
     }
+    <h3>Доступ:</h3>
+    <p>@Model.AccessTag</p>
     <button type="submit">Сохранить</button>
   </form>
 </div>
