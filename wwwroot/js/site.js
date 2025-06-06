@@ -51,6 +51,9 @@ $(document).ready(function () {
     updatePartialView();
 });
 
+
+
+
 function autoResize(elem) {
     elem.style.height = 'auto';
     elem.style.height = (elem.scrollHeight-7) + 'px';
@@ -74,3 +77,21 @@ document.querySelectorAll(".menu-item").forEach((item) => {
           }%)`;
         });
       });
+
+
+
+      const select = document.getElementById('post-list');
+
+// Добавляем обработчик события наведения
+select.addEventListener('mouseover', function (event) {
+    if (event.target.tagName === 'OPTION') {
+        event.target.classList.add('hovered'); // Добавляем класс при наведении
+    }
+});
+
+// Добавляем обработчик события ухода курсора
+select.addEventListener('mouseout', function (event) {
+    if (event.target.tagName === 'OPTION') {
+        event.target.classList.remove('hovered'); // Убираем класс при уходе
+    }
+});

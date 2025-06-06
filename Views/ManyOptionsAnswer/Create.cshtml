@@ -1,8 +1,61 @@
+@model DeLavant_CourseWeb.Models.Question
 @{
-    ViewData["Title"] = "Несколько выборов";
+    ViewData["Title"] = "Создание вопроса с несколькими выборами";
 }
 
-<h2>Несколько выборов</h2>
+<h2>Создание вопроса с несколькими выборами</h2>
+<p>Выберите правильные варианты ответа</p>
 
-<a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId" asp-route-testId="@ViewBag.testId">Назад</a>
-<button type="submit">Сохранить</button>
+<form asp-action="Create" method="post">
+    <label asp-for="Text">Текст вопроса:</label><br/>
+    <textarea rows="3" cols="50" asp-for="Text" required></textarea><br/><br/>
+
+    <!-- Скрытые поля для передачи id курса и теста -->
+    <input type="hidden" name="courseId" value="@ViewBag.courseId" />
+    <input type="hidden" name="testId" value="@ViewBag.testId" />
+
+    <!-- Контейнер для вариантов ответов -->
+    <div class="answer-options">
+        <!-- Начальное количество вариантов ответа -->
+        <div class="answer-option-container">
+            <input type="checkbox" name="SelectedAnswer[]" value="0"/>
+            <input type="text" name="AnswerOptions[0]" placeholder="Первый вариант ответа" required />
+            <button type="button" class="remove-btn" data-index="0">Удалить</button>
+        </div>
+    </div>
+
+    <!-- Возможность добавить дополнительные варианты -->
+    <button type="button" onclick="addAnswerOption()">Добавить вариант</button>
+
+    <!-- Кнопка сохранения -->
+    <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId" asp-route-testId="@ViewBag.testId">Назад</a>
+    <button type="submit">Добавить</button>
+</form>
+
+<!-- Скрипт для динамического добавления вариантов ответов -->
+<script>
+    let nextIndex = 1;
+
+    function addAnswerOption() {
+        const container = document.querySelector(".answer-options");
+
+        const newOptionDiv = document.createElement("div");
+        newOptionDiv.className = "answer-option-container";
+        newOptionDiv.innerHTML = `
+            <input type="checkbox" name="SelectedAnswer[]" value="${nextIndex}"/>
+            <input type="text" name="AnswerOptions[${nextIndex}]" placeholder="Новый вариант ответа" required />
+            <button type="button" class="remove-btn" data-index="${nextIndex}">Удалить</button>
+        `;
+        container.appendChild(newOptionDiv);
+        nextIndex++;
+    }
+
+    // Функция для удаления варианта ответа
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-btn')) {
+            event.preventDefault();
+            const parentContainer = event.target.closest('.answer-option-container');
+            parentContainer.remove();
+        }
+    });
+</script>
