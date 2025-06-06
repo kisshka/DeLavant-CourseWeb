@@ -126,8 +126,24 @@
       }
     </p>
     }
-    <h3>Доступ:</h3>
-    <p>@Model.AccessTag</p>
-    <button type="submit">Сохранить</button>
+        <h3>Доступ:</h3>
+        <p>@Model.AccessTag</p>
+        <h3>Должности:</h3>
+        @if (Model.AccessDepartments != null && Model.AccessDepartments.Any())
+        {
+            @foreach (var posts in Model.AccessDepartments)
+            {
+                <p>@posts</p>
+            }
+        }
+        <h3>Участники:</h3>
+        @if (Model.AccessUsers != null && Model.AccessUsers.Any())
+        {
+            @foreach (var users in Model.AccessUsers)
+            {
+                <p>@users</p>
+            }
+        }
+        <button type="submit">Сохранить</button>
   </form>
 </div>

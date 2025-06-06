@@ -5,17 +5,16 @@
 
 <h2>Настройки доступа</h2>
 <div>
-    <input type="radio" name="accessType" value="Common" checked> Общедоступные<br/>
-    <input type="radio" name="accessType" value="Group"> Групповые<br/>
-    <input type="radio" name="accessType" value="Individual"> Индивидуальные<br/>
-    <input type="radio" name="accessType" value="Hidden"> Скрытые<br/>
+    <input type="radio" name="accessType" value="Common" @(ViewBag.CurrentAccessType == "Common" ? "checked" : "")> Общедоступные<br />
+    <input type="radio" name="accessType" value="Group" @(ViewBag.CurrentAccessType == "Group" ? "checked" : "")>Групповые<br />
+    <input type="radio" name="accessType" value="Individual" @(ViewBag.CurrentAccessType == "Individual" ? "checked" : "")> Индивидуальные<br />
+    <input type="radio" name="accessType" value="Hidden" @(ViewBag.CurrentAccessType == "Hidden" ? "checked" : "")> Скрытые<br />
 </div>
 
-<div id="responseArea"></div>
-
 <form asp-action="Save" asp-controller="Course" method="post">
+    <div id="responseArea"></div>
     <input value="@ViewBag.SelectedId" name="Id" type="hidden"/>
     @* Id: SelectedAccessType не удалять, без него не работает ниче *@
-    <input type="hidden" name="SelectedAccessType" id="SelectedAccessType" value="Common" /> <!-- Начальное значение -->
+    <input type="hidden" name="SelectedAccessType" id="SelectedAccessType" value="Common" />
     <button type="submit">Сохранить</button>
 </form>
