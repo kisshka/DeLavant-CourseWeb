@@ -63,11 +63,11 @@
             autocomplete="off"
           />
           <select
-            class="select-more"
+            
             asp-for="SelectedPostIds"
             id="post-list"
             asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)"
-            multiple
+            multiple="multiple"
           ></select>
         </div>
 

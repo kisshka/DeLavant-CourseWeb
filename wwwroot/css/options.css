@@ -23,16 +23,17 @@
     position: relative;
     white-space: nowrap; /* Запрет переноса текста */
 }
-
 .option:hover {
     background-color: #ff4757; /* Красный фон при наведении */
     color: white; /* Белый текст при наведении */
 }
-
 .option.selected {
     background-color: #ccc; /* Серый фон для выбранного элемента */
     color: white; /* Белый текст для выбранного элемента */
 }
+
+
+
 
 .option::after {
     content: "";
@@ -68,3 +69,20 @@ option:hover {
     color: white !important;
     border-radius: 5px;
 }
+
+select
+{
+    margin-top: 1rem;
+}
+option :checked
+{
+    background-color: #ff4757;
+}
+select option:checked {
+  background-color: var(--primary-red);
+  color: white;
+}
+select option:hover{
+    background-color: var(--secondary-red) !important;
+}
+

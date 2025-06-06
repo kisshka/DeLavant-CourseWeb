@@ -7,7 +7,7 @@
 а то все повалится к чертям
 или если что-то меняешь то чтобы не повалилось, но лучше 
 всетаки просто задать этим классам те же свойства*@
-
+<div class="content-70percent-width"> 
 <h2>Создание вопроса с одним выбором</h2>
 <p>Выберите правильный вариант ответа</p>
 <form asp-action="Create" method="post">
@@ -34,6 +34,8 @@
     <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId" asp-route-testId="@ViewBag.testId">Назад</a>
     <button type="submit">Добавить</button>
 </form>
+</div>
+
 
 @* Пока не троогать *@
 <script>
@@ -71,3 +73,4 @@
         });
     }
 </script>
+

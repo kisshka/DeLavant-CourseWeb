@@ -110,3 +110,29 @@ button {
   background-position: center;
   background-size: contain;
 }
+
+.btn-img-text
+{
+  border: 2px solid var(--primary-red);
+  border-radius: 30px;
+  padding: 5px 20px;
+  width: 250px;
+  height: auto;
+  text-decoration: none;
+  color: var(--primary-red);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 5px;
+  grid-template-areas: 'img text';
+  align-items: center;
+}
+.btn-img{
+  grid-area: 'img';
+  height: 100%;
+  width: auto;
+}
+.btn-text{
+  font-size: 1.5rem;
+  grid-area: 'text';
+  text-align: center;
+}
