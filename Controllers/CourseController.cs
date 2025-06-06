@@ -20,7 +20,6 @@ namespace DeLavant_CourseWeb.Controllers
         public IActionResult Index()
         {   
             var coursesCollection = _database.GetCollection<Course>("Courses");
-            // var courses = coursesCollection.Find(_ => true).ToList();
             var courses = coursesCollection.AsQueryable().ToList();
             return View(courses);
         }
