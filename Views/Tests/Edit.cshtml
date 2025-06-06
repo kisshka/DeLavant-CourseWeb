@@ -29,35 +29,28 @@
 @* Отображение вопросов включенных в тест *@
     <h3>Список вопросов:</h3>
 
-    @if (Model.Questions != null && Model.Questions.Any()) 
-    { 
-        @foreach( var question in Model.Questions) {
-        
-        <div class="course-element">
-        @* Вопросы перемещать нельзя *@
-            <div class="course-element-UD"></div>
-            <a
-            asp-controller="Lectures"
-            asp-action="Edit"
-            asp-route-courseId="@Model.Id"
-            asp-route-lectureId="@question.Id"
-            class="course-element-info" >
-
-            <div class="course-element-name">@question.Text</div>
-            <div class="course-element-description">@question.QuestionType</div>
-            </a>
-        @* Ссылка для удаления *@
-            <a
-            class="course-element-delete"
-            asp-controller="Lectures"
-            asp-action="DeleteQuestion"
-            asp-route-courseId="@ViewBag.courseIdForTest"
-            asp-route-testId="@Model.Id"
-            asp-route-questionId="@question.Id">
-            </a>
-        </div>
-        } 
-    }
+    @foreach (var question in ViewBag.questions)
+        {
+            <div class="course-element">
+                <!-- Вопросы перемещать нельзя -->
+                <a
+                    asp-controller="Lectures"
+                    asp-action="Edit"
+                    asp-route-courseId="@Model.Id"
+                    asp-route-lectureId="@question.Id"
+                    class="course-element-info">
+                    <div class="course-element-name">@question.Text</div>
+                    <div class="course-element-description">@question.QuestionType</div>
+                </a>
+                <!-- Ссылка для удаления -->
+                <a
+                    class="course-element-delete"
+                    asp-controller="Tests"
+                    asp-action="DeleteQuestion"
+                    asp-route-questionId="@question.Id">
+                </a>
+            </div>
+        }
 
 <p></p>
 @* Добавление раздела курса *@
