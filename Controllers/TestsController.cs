@@ -17,7 +17,7 @@ namespace DeLavant_CourseWeb.Controllers
             _logger = logger;
         }
         
-//изменение лекции
+    // редактирование теста
         public IActionResult Edit(string courseId, string testId)
         {
             var coursesCollection = _database.GetCollection<Course>("Courses");
@@ -35,45 +35,44 @@ namespace DeLavant_CourseWeb.Controllers
                 return NotFound();
             }
         }
-
-[HttpPost]
-public IActionResult Edit(string courseId, string testId, Test test)
-{
-    var coursesCollection = _database.GetCollection<Course>("Courses");
-    var course = coursesCollection.Find(c => c.Id == courseId).FirstOrDefault();
-
-    if (course == null)
+    // редактирование теста
+    [HttpPost]
+    public IActionResult Edit(string courseId, string testId, Test test)
     {
-        return NotFound(); // Курса с таким идентификатором не существует
+        var coursesCollection = _database.GetCollection<Course>("Courses");
+        var course = coursesCollection.Find(c => c.Id == courseId).FirstOrDefault();
+
+        if (course == null)
+        {
+            return NotFound(); // Курса с таким идентификатором не существует
+        }
+
+        // Находим лекцию в курсе
+        var editedTest = course.Tests.FirstOrDefault(l => l.Id ==  testId);
+
+        if (editedTest == null)
+        {
+            return NotFound(); // Лекции с таким идентификатором не существует
+        }
+
+        editedTest.Name = test.Name;
+        editedTest.Description = test.Description;
+
+        // Проверка валидности модели
+        if (!ModelState.IsValid)
+        {
+            return View(editedTest); // Вернём представление с лекцией и сообщением об ошибке
+        }
+
+        // Обновляем коллекцию в базе данных
+        coursesCollection.UpdateOne(
+            c => c.Id == courseId,
+            Builders<Course>.Update.Set(c => c.Tests, course.Tests)
+        );
+
+        return RedirectToAction(nameof(Edit), "Course" , new { id=courseId});
     }
-
-    // Находим лекцию в курсе
-    var editedTest = course.Tests.FirstOrDefault(l => l.Id ==  testId);
-
-    if (editedTest == null)
-    {
-        return NotFound(); // Лекции с таким идентификатором не существует
-    }
-
-    editedTest.Name = test.Name;
-    editedTest.Description = test.Description;
-
-    // Проверка валидности модели
-    if (!ModelState.IsValid)
-    {
-        return View(editedTest); // Вернём представление с лекцией и сообщением об ошибке
-    }
-
-    // Обновляем коллекцию в базе данных
-    coursesCollection.UpdateOne(
-        c => c.Id == courseId,
-        Builders<Course>.Update.Set(c => c.Tests, course.Tests)
-    );
-
-    return RedirectToAction(nameof(Edit), "Course" , new { id=courseId});
-}
-// Удаление
-
+    // Удаление теста
        public IActionResult Delete (string courseId, string testId)
         {
             var coursesCollection = _database.GetCollection<Course>("Courses");
@@ -89,6 +88,30 @@ public IActionResult Edit(string courseId, string testId, Test test)
         );
 
             return RedirectToAction(nameof(Edit), "Course" , new { id=courseId}); // Перенаправляем на страницу списка курсов
+        }
+
+
+    // Удаление Вопроса из списка вопросов в тесте
+        public IActionResult DeleteQuestion (string courseId, string testId, string questionId)
+        {
+        //Проходя по иерархии курса находим нужный вопрос
+            var coursesCollection = _database.GetCollection<Course>("Courses");
+            var course = coursesCollection.Find(c => c.Id == courseId).FirstOrDefault();
+            var test = course.Tests.FirstOrDefault(l => l.Id ==  testId);
+            var indexOfQuestion = test.Questions.FindIndex(l => l.Id == questionId);
+            
+            course.Tests.RemoveAt(indexOfQuestion);
+
+        // Удаляем вопрос из коллекции тестов с помощью оператора $pull
+            coursesCollection.UpdateOne(
+                c => c.Id == courseId && c.Tests.Any(t => t.Id == testId),
+                Builders<Course>.Update.PullFilter(
+                    x => x.Tests[-1].Questions, 
+                    q => q.Id == questionId
+                )
+            );
+
+            return RedirectToAction(nameof(Edit), "Test" , new { courseId = courseId, testId = testId});
         }
 
     }

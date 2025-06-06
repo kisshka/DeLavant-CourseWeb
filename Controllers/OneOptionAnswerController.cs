@@ -50,6 +50,7 @@ namespace DeLavant_CourseWeb.Controllers
             // 3. Создание объекта Вопроса
             var newQuestion = new Question
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 Text = questionText,
                 OneAnswerOptions = options,
                 QuestionType = "OneOption"
