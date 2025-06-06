@@ -9,31 +9,23 @@
 <div class="access-box-list">
     <label class="radio-container">
         <span class="radio-label">общедоступный</span>
-        <input type="radio" name="accessType" value="Common" >
+        <input type="radio" name="accessType" value="Common" @(ViewBag.CurrentAccessType == "Common" ? "checked" : "")>
     </label>
     <label class="radio-container">
         <span class="radio-label">несколько групп</span>
-        <input type="radio" name="accessType" value="Group">
+        <input type="radio" name="accessType" value="Group" @(ViewBag.CurrentAccessType == "Group" ? "checked" : "")>
         
     </label>
     <label class="radio-container">
         <span class="radio-label">индивидуальный</span>
-        <input type="radio" name="accessType" value="Individual">
+        <input type="radio" name="accessType" value="Individual" @(ViewBag.CurrentAccessType == "Individual" ? "checked" : "")>
     </label>
     <label class="radio-container">
          <span class="radio-label" checked>скрыт для всех</span>
-        <input type="radio" name="accessType" value="Hidden">
+        <input type="radio" name="accessType" value="Hidden" @(ViewBag.CurrentAccessType == "Hidden" ? "checked" : "")>
     </label>
     </div>
     <div id="responseArea"></div>
-    <form asp-action="Save" asp-controller="Course" method="post">
-<h2>Настройки доступа</h2>
-<div>
-    <input type="radio" name="accessType" value="Common" @(ViewBag.CurrentAccessType == "Common" ? "checked" : "")> Общедоступные<br />
-    <input type="radio" name="accessType" value="Group" @(ViewBag.CurrentAccessType == "Group" ? "checked" : "")>Групповые<br />
-    <input type="radio" name="accessType" value="Individual" @(ViewBag.CurrentAccessType == "Individual" ? "checked" : "")> Индивидуальные<br />
-    <input type="radio" name="accessType" value="Hidden" @(ViewBag.CurrentAccessType == "Hidden" ? "checked" : "")> Скрытые<br />
-</div>
 
 <form asp-action="Save" asp-controller="Course" method="post">
     <div id="responseArea"></div>
