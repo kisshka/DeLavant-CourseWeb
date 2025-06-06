@@ -31,26 +31,24 @@ $(document).ready(function () {
     }
   });
 });
-
 $(document).ready(function () {
-    $('input[name="accessType"]').on('change', function () {
-        var selectedValue = $(this).val();
+    function updatePartialView() {
+        var selectedValue = $('input[name="accessType"]:checked').val();
         $('#SelectedAccessType').val(selectedValue);
+
         $.ajax({
             url: '/Course/Access',
             data: { accessType: selectedValue },
             type: 'POST',
             success: function (response) {
                 $('#responseArea').html(response);
-            },
-            error: function (xhr, status, error) {
-                alert('Ошибка! Проверьте консоль.');
-                console.log(status + ': ' + error);
             }
         });
+    };
+    $('input[name="accessType"]').on('change', function () {
+        updatePartialView(); 
     });
-    $('input[name="accessType"][value="Common"]').trigger('change');
-    //для того какой выбран нужно radio-container задать border 1px solid red
+    updatePartialView();
 });
 
 

@@ -144,7 +144,7 @@ namespace DeLavant_CourseWeb.Controllers
             }
 
             // Маппируем данные пользователя в RegisterInputModel
-            var registerInputModel = new EditUserViewModel
+            var editInputModel = new EditUserViewModel
             {
                 Email = user.Email,
                 UserSurName = user.UserSurName,
@@ -164,7 +164,7 @@ namespace DeLavant_CourseWeb.Controllers
             areas.Insert(0, new Area { IdArea = 0, NameArea = "Без участка" });
             ViewBag.Areas = new SelectList(areas, "IdArea", "NameArea");
 
-            return View(registerInputModel); // Передаем новую модель представления
+            return View(editInputModel); // Передаем новую модель представления
         }
 
         // POST: UserController/Edit/5

@@ -1,2 +1,23 @@
-<span>Вы выбрали групповые курсы!</span>
-<span>Доступ открыт для всех выбранных групп.</span>
+@using DeLavant_CourseWeb.Models.UserBd;
+@model DeLavant_CourseWeb.Models.UserBd.EditUserViewModel;
+<p>Выбирите должности: </p>
+<form asp-action="Save" asp-controller="Course">
+    <div class="column right-column">
+        <div class="form-group">
+            <label asp-for="SelectedPostIds">Должности</label>
+            <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
+            <input type="text"
+                   id="search-post"
+                   placeholder="Поиск должности"
+                   onkeyup="filterCategories()"
+                   autocomplete="off" />
+            <select class="select-more"
+                    asp-for="SelectedPostIds"
+                    id="post-list"
+                    asp-items="@((IEnumerable<SelectListItem>)ViewBag.Posts)"
+                    multiple
+                    name="SelectedPostIds">
+            </select>
+        </div>
+    </div>
+</form>

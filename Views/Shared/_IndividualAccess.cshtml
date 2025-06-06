@@ -1,2 +1,21 @@
-<span>Вы выбрали индивидуальные курсы!</span>
-<span>Доступ открыт для всех выбранных вами пользователей.</span>
+@using DeLavant_CourseWeb.Models.UserBd;
+@model DeLavant_CourseWeb.Models.UserBd.EditUserViewModel;
+<p>Выбирите участников: </p>
+<div class="column right-column">
+    <div class="form-group">
+        <label asp-for="SelectedPostIds">Участники</label>
+        <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
+        <input type="text"
+                id="search-post"
+                placeholder="Поиск участника"
+                onkeyup="filterCategories()"
+                autocomplete="off" />
+        <select class="select-more"
+                asp-for="SelectedPostIds"
+                id="post-list"
+                asp-items="@((IEnumerable<SelectListItem>)ViewBag.Users)"
+                multiple
+                name="SelectedPostIds">
+        </select>
+    </div>
+</div>
