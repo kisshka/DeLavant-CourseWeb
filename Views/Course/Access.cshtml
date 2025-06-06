@@ -3,19 +3,36 @@
     ViewData["Title"] = "Настройки доступа";
 }
 
-<h2>Настройки доступа</h2>
-<div>
-    <input type="radio" name="accessType" value="Common" checked> Общедоступные<br/>
-    <input type="radio" name="accessType" value="Group"> Групповые<br/>
-    <input type="radio" name="accessType" value="Individual"> Индивидуальные<br/>
-    <input type="radio" name="accessType" value="Hidden"> Скрытые<br/>
-</div>
 
-<div id="responseArea"></div>
-
-<form asp-action="Save" asp-controller="Course" method="post">
+<div class="access-box">
+<span>настройка доступа</span>
+<div class="access-box-list">
+    <label class="radio-container">
+        <span class="radio-label">общедоступный</span>
+        <input type="radio" name="accessType" value="Common" >
+    </label>
+    <label class="radio-container">
+        <span class="radio-label">несколько групп</span>
+        <input type="radio" name="accessType" value="Group">
+        
+    </label>
+    <label class="radio-container">
+        <span class="radio-label">индивидуальный</span>
+        <input type="radio" name="accessType" value="Individual">
+    </label>
+    <label class="radio-container">
+         <span class="radio-label" checked>скрыт для всех</span>
+        <input type="radio" name="accessType" value="Hidden">
+    </label>
+    </div>
+    <div id="responseArea"></div>
+    <form asp-action="Save" asp-controller="Course" method="post">
     <input value="@ViewBag.SelectedId" name="Id" type="hidden"/>
     @* Id: SelectedAccessType не удалять, без него не работает ниче *@
     <input type="hidden" name="SelectedAccessType" id="SelectedAccessType" value="Common" /> <!-- Начальное значение -->
     <button type="submit">Сохранить</button>
-</form>
+    </form>
+</div>
+
+
+

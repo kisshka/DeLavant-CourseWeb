@@ -1,0 +1,83 @@
+.radio-container {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    text-align: center;
+    background: rgba(255, 85, 85, 0.154);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Добавлен переход для текста */
+}
+
+/* Стиль при наведении (убрано !important) */
+.radio-container:hover {
+    background-color: var(--secondary-gray);
+    color: var(--primary-gray);
+}
+
+/* Стиль для ВЫБРАННОГО контейнера (главное изменение) */
+input[type="radio"]:checked + .radio-container {
+   border: 1px solid red;
+    color: white !important; /* Белый текст */
+}
+
+/* Фикс для hover на выбранном элементе */
+input[type="radio"]:checked + .radio-container {
+    background-color: black !important; /* Остаётся чёрным */
+    color: white !important;
+}
+
+.radio-label {
+    padding: 5px;
+    font-size: 16px;
+    width: 100%;
+    transition: inherit; /* Наследует переход от контейнера */
+}
+
+.radio-container input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Остальные стили остаются без изменений */
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+input[type="radio"]:checked + .radio-container
+{
+    border: 1px solid black;
+}
+input[type="radio"]:checked::after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    background-image: url('../icons/icon-done.svg');
+    background-size: cover;
+}
+
+.access-box {
+    border-radius: 30px;
+    margin: 0 auto;
+    height: auto;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid var(--primary-red);
+    padding: 2rem;
+}
+
+.access-box-list {
+    border-radius: 20px;
+    width: auto;
+    border: 1px solid var(--primary-red);
+    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
+}

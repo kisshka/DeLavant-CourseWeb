@@ -32,100 +32,94 @@
     <div asp-validation-summary="All"></div>
     
     @{ var courseName = Model.Name.Length; 
-    var rows = courseName/20; var rows2 = 0; 
+    var rows = 3; var rows2 = 0; 
     if(!string.IsNullOrEmpty(Model.Description))
      { 
         var courseDescription = Model.Description.Length; 
         rows2 = courseDescription/30; 
       } 
      
-     }
-    <textarea
-      class="autoresize course-name"
-      oninput="autoResize(this)"
-      rows="@rows - 1"
-      asp-for="Name"
-      required
-      placeholder="название курса"
-    ></textarea>
+    }
 
-    <textarea
-      class="autoresize course-description"
-      oninput="autoResize(this)"
-      rows="@rows2"
-      asp-for="Description"
-      placeholder="описание курса"
-    ></textarea>
+    <textarea class="autoresize course-name"
+      oninput="autoResize(this)" rows="@rows"
+      asp-for="Name" required placeholder="название курса">
+    </textarea>
 
-    @* Добавление раздела курса *@
-    <div>
-      <a
-        asp-controller="Course"
-        asp-action="AddLection"
-        asp-route-id="@Model.Id"
-        >Добавить лекцию</a>
-    </div>
-    <div>
-      <a asp-controller="Course" 
-      asp-action="AddTest" 
-      asp-route-id="@Model.Id"
-      >Добавить тест</a>
-    </div>
+    <textarea class="autoresize course-description"
+      oninput="autoResize(this)" rows="@rows2"
+      asp-for="Description" placeholder="описание курса">
+    </textarea>
+
     @* Вывод лекций и тестов *@
-    <h3>Лекции:</h3>
     @if (Model.Lectures != null && Model.Lectures.Any()) 
     { 
-        @foreach( var lecture in Model.Lectures) {
-        
+        @foreach( var lecture in Model.Lectures) 
+        {
         <div class="course-element">
-            <div class="course-element-UD"></div>
+            <a class="course-element-UD"></a>
             
-            <a
-            asp-controller="Lectures"
-            asp-action="Edit"
-            asp-route-courseId="@Model.Id"
-            asp-route-lectureId="@lecture.Id"
-            class="course-element-info" >
-
-            <div class="course-element-name">@lecture.Name</div>
-            <div class="course-element-description">@lecture.Description</div>
-            
+            <a class="course-element-info"
+               asp-controller="Lectures"
+               asp-action="Edit"
+               asp-route-courseId="@Model.Id"
+               asp-route-lectureId="@lecture.Id" 
+            >
+              <div class="course-element-name">@lecture.Name</div>
+              <div class="course-element-description">@lecture.Description</div>
             </a>
 
-            <a
-            class="course-element-delete"
-            asp-controller="Lectures"
-            asp-action="Delete"
-            asp-route-courseId="@Model.Id"
-            asp-route-lectureId="@lecture.Id"></a>
+            <a class="course-element-delete"
+                asp-controller="Lectures"
+                asp-action="Delete"
+                asp-route-courseId="@Model.Id"
+                asp-route-lectureId="@lecture.Id"></a>
         </div>
         } 
     }
 
-    <h3>Тесты:</h3>
-    @if (Model.Tests != null && Model.Tests.Any()) {
-    <p>
-      @foreach( var test in Model.Tests) {
-      <a
-        asp-controller="Tests"
-        asp-action="Edit"
-        asp-route-courseId="@Model.Id"
-        asp-route-testId="@test.Id"
-      >
-        @test.Name| @test.Description|
-      </a>
-      <a
-        asp-controller="Tests"
-        asp-action="Delete"
-        asp-route-courseId="@Model.Id"
-        asp-route-testId="@test.Id"
-      >
-        <img src="image.jpg" alt="удалить" />
-      </a>
+    @if (Model.Tests != null && Model.Tests.Any()) 
+    {
+      @foreach( var test in Model.Tests) 
+      {
+         <div class="course-element">
+            <a class="course-element-UD"></a>
+            
+            <a class="course-element-info"
+              asp-controller="Tests"
+              asp-action="Edit"
+              asp-route-courseId="@Model.Id"
+              asp-route-testId="@test.Id"
+            >
+             <div class="course-element-name">@test.Name</div>
+             <div class="course-element-description">@test.Description</div>
+            </a>
 
+            <a class="course-element-delete"
+              asp-controller="Tests"
+              asp-action="Delete"
+              asp-route-courseId="@Model.Id"
+              asp-route-testId="@test.Id"
+            ></a>
+          </div>
       }
-    </p>
     }
+
+    @* Добавление раздела курса *@
+    <div class="row-center">
+      <a class="btn-img-text" asp-controller="Course"
+        asp-action="AddLection" asp-route-id="@Model.Id" >
+          <img class="btn-img" src="~/icons/icon-add-lecture.svg" />
+          <span class="btn-text">вставить лекцию</span>
+      </a>
+  
+      <a  class="btn-img-text" asp-controller="Course" 
+        asp-action="AddTest" asp-route-id="@Model.Id" >
+          <img class="btn-img" src="~/icons/icon-add-test.svg" />
+          <span class="btn-text">вставить тест</span>
+      </a>
+    </div>
+
     <h3>Доступ:</h3>
     <p>@Model.AccessTag</p>
     <button type="submit">Сохранить</button>

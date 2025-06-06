@@ -59,7 +59,7 @@
 }
 .content-70percent-width {
   margin: 0 auto;
-  width: 50%;
+  width: 60%;
   min-width: 700px;
 }
 
@@ -284,15 +284,16 @@ header {
 textarea {
   outline: none;
   box-sizing: border-box;
-  padding: 1rem;
+  padding-top: 1rem;
   border-radius: 1.5rem;
   font-family: var(--base-font);
   width: 100%;
-   align-items: center;
+  align-items: center;
+   overflow-y: scroll;
 }
 .autoresize {
   resize: none;
-  overflow-y: hidden;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 .course-name {
@@ -300,6 +301,7 @@ textarea {
   border: 2px solid var(--secondary-red);
   color: var(--primary-red);
   text-align: center;
+  min-height: 3rem;
 }
 .course-name:focus {
   border: 2px solid var(--primary-red);
@@ -311,18 +313,25 @@ textarea {
 
 .course-description {
   color: var(--primary-gray);
-
-   padding: 0.5rem;
+  padding: 0.5rem;
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: 2px solid var(--secondary-gray);
 }
 .course-description:focus {
   border: 2px solid var(--primary-gray);
- 
-
 
   -webkit-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
--moz-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
+  -moz-box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
+  box-shadow: 0px 0px 46px 5px rgba(189, 189, 189, 0.2);
+}
+
+.row-center
+{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  justify-content: center;
+  gap: 20px
 }
