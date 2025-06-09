@@ -11,11 +11,11 @@
     </div>
 
     <div>
-            <a href="" class="open-full">Общедоступные</a>
-            </div>
+            <a asp-action="AllCourses" asp-route-accessType="All" class="open-full">Недавно добавленные</a>
+    </div>
     <div class="first-top">
         
-        @foreach (var course in Model)
+        @foreach (var course in Model.AsEnumerable().Reverse().Take(3))
         {
             <div class="card-item">
                 <span class="card-item-name">
@@ -26,4 +26,73 @@
 
         }
     </div>
+
+    <div>
+            <a asp-action="AllCourses" asp-route-accessType="Common"  class="open-full">Общедоступные</a>
+    </div>
+    <div class="first-top">
+        
+        @foreach (var course in Model.Where(o => o.AccessTag == "Common").Take(3))
+        {
+            <div class="card-item">
+                <span class="card-item-name">
+                    @course.Name
+                </span>
+                <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+            </div>
+
+        }
+    </div>
+
+    <div>
+            <a asp-action="AllCourses" asp-route-accessType="Group" class="open-full">Групповые</a>
+    </div>
+    <div class="first-top">
+        
+        @foreach (var course in Model.Where(o => o.AccessTag == "Group").Take(3))
+        {
+            <div class="card-item">
+                <span class="card-item-name">
+                    @course.Name
+                </span>
+                <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+            </div>
+
+        }
+    </div>    
+
+    <div>
+            <a asp-action="AllCourses" asp-route-accessType="Individual" class="open-full">Индивидуальные</a>
+    </div>
+    <div class="first-top">
+        
+        @foreach (var course in Model.Where(o => o.AccessTag == "Individual").Take(3))
+        {
+            <div class="card-item">
+                <span class="card-item-name">
+                    @course.Name
+                </span>
+                <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+            </div>
+
+        }
+    </div> 
+
+    <div>
+            <a asp-action="AllCourses" asp-route-accessType="Hidden" class="open-full">Скрытые</a>
+    </div>
+    <div class="first-top">
+        
+        @foreach (var course in Model.Where(o => o.AccessTag == "Hidden").Take(3))
+        {
+            <div class="card-item">
+                <span class="card-item-name">
+                    @course.Name
+                </span>
+                <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+            </div>
+
+        }
+    </div> 
+
 </div>
