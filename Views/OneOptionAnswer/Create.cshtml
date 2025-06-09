@@ -8,7 +8,6 @@
 или если что-то меняешь то чтобы не повалилось, но лучше 
 всетаки просто задать этим классам те же свойства*@
 <div class="content-70percent-width">
-    <h2>Создание вопроса с одним выбором</h2>
     <div class="test-element-builder">
         <form asp-action="Create" method="post">
 
@@ -31,13 +30,15 @@
                 </div>
             </div>
             <button type="button" onclick="addAnswerOption()" class="gray-blur-background">Добавить вариант</button>
-
-            <!-- Кнопка сохранения -->
-            <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId"
+              <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId"
                 asp-route-testId="@ViewBag.testId">Назад</a>
             <button type="submit">Добавить</button>
+
+           
         </form>
     </div>
+     <!-- Кнопка сохранения -->
+          
 </div>
 
 @* Пока не троогать *@

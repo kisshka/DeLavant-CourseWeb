@@ -7,6 +7,7 @@
   width: 400px;
   display: flex;
   flex-direction: column;
+  
 }
 .answer-option-container {
   vertical-align: middle;
@@ -57,14 +58,21 @@
 
 .gray-blur-background
 {
+    margin: auto 0;
+    margin-top: -20px;
+   
     border: none;
     border-radius: 50px;
     height: auto;
+    width: 300px;
+
     background-color: rgba(255, 255, 255, 0.545); /* Белый с небольшой прозрачностью */
     backdrop-filter: blur(10px); /* Эффект размытия */
-    display: flex;
-    width: 300px;
+    -webkit-backdrop-filter: blur(10px); /* Для Safari */
+    
+
     font-size: large;
     align-items: center;
     text-align: center;
+    padding: 1px;
 }
