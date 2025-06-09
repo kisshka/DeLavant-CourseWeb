@@ -153,7 +153,7 @@ namespace DeLavant_CourseWeb.Controllers
         public IActionResult AllCourses (string? accessType)
         { 
             var coursesCollection = _database.GetCollection<Course>("Courses");
-            var courses = coursesCollection.AsQueryable().ToList();
+            var courses = coursesCollection.AsQueryable().AsEnumerable().Reverse().ToList();
             if(accessType != "All")
             {
             courses = coursesCollection.AsQueryable().Where(c => c.AccessTag == accessType).ToList();
