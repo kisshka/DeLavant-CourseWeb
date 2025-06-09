@@ -1,0 +1,78 @@
+.test-element-builder {
+  margin: 0 auto;
+  padding: 1rem;
+  border: 2px solid var(--primary-red);
+  border-radius: 1rem;
+  height: 500px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  
+}
+.answer-option-container {
+  vertical-align: middle;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* Выравнивание по высоте */
+  height: auto; /* Занимает всю доступную высоту */
+  margin-bottom: 1rem;
+}
+.option-container-action {
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+}
+.option-container-text {
+  border-radius: 0.5rem;
+  width: 80%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  min-height: 2rem;
+  max-height: 10rem;
+}
+.test-element-content
+{
+    width: 100;
+}
+.remove-btn {
+  background: url("../icons/icon-delete.svg") center/cover no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.list {
+  overflow-y: auto;
+  width: 100%;
+  height: 250px;
+}
+.list::-webkit-scrollbar {
+ display: none;
+}
+
+.border-left
+{
+   border: 5px dashed var(--primary-red);
+   font-size: x-large;
+}
+
+.gray-blur-background
+{
+    margin: auto 0;
+    margin-top: -20px;
+   
+    border: none;
+    border-radius: 50px;
+    height: auto;
+    width: 300px;
+
+    background-color: rgba(255, 255, 255, 0.545); /* Белый с небольшой прозрачностью */
+    backdrop-filter: blur(10px); /* Эффект размытия */
+    -webkit-backdrop-filter: blur(10px); /* Для Safari */
+    
+
+    font-size: large;
+    align-items: center;
+    text-align: center;
+    padding: 1px;
+}
