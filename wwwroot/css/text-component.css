@@ -23,7 +23,7 @@ label {
 
 .text-danger
 {
-
+  font-size: 12pt;
   width: 100%;
   font-style: italic;
   font-family: 'Courier New', Courier, monospace;

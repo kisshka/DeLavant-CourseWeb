@@ -192,6 +192,7 @@ header {
   text-wrap: wrap;
   color: var(--primary-red);
   width: 80%;
+  word-break: break-all;
 }
 .card-item-open {
   font-family: "Courier New", Courier, monospace;
@@ -284,13 +285,21 @@ header {
 textarea {
   outline: none;
   box-sizing: border-box;
-  padding-top: 1rem;
-  border-radius: 1.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
   font-family: var(--base-font);
   width: 100%;
   align-items: center;
-   overflow-y: scroll;
+  overflow-y: scroll; /* Вертикальная прокрутка */
+  resize: vertical; /* Позволяет изменять размер только по вертикали */
+
+  
 }
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+
 .autoresize {
   resize: none;
   overflow-y: visible;

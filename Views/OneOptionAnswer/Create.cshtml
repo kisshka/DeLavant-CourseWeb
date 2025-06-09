@@ -7,35 +7,38 @@
 а то все повалится к чертям
 или если что-то меняешь то чтобы не повалилось, но лучше 
 всетаки просто задать этим классам те же свойства*@
-<div class="content-70percent-width"> 
-<h2>Создание вопроса с одним выбором</h2>
-<p>Выберите правильный вариант ответа</p>
-<form asp-action="Create" method="post">
-    <label asp-for="Text">Текст вопроса:</label><br/>
-    <textarea rows="3" cols="50" asp-for="Text" required></textarea><br/><br/>
+<div class="content-70percent-width">
+    <h2>Создание вопроса с одним выбором</h2>
+    <div class="test-element-builder">
+        <form asp-action="Create" method="post">
 
-@* Скрытые поля для передачи id курса и теста *@
-    <input type="hidden" name="courseId" value="@ViewBag.courseId" />
-    <input type="hidden" name="testId" value="@ViewBag.testId" />
+            <textarea asp-for="Text" class="border-left"
+              placeholder="напишите ваш вопрос, и добавьте варианты ответа"
+               rows="5" required></textarea>
 
-    <!-- Контейнер для вариантов ответов -->
-    <div class="answer-options">
-        <!-- Начальное количество вариантов ответа -->
-        <div class="answer-option-container">
-            <input type="radio" name="SelectedAnswer" value="0"/>
-            <input type="text" name="AnswerOptions[0]" placeholder="Первый вариант ответа" required />
-            <button type="button" class="remove-btn" data-index="0">Удалить</button>
-        </div>
+            @* Скрытые поля для передачи id курса и теста *@
+            <input type="hidden" name="courseId" value="@ViewBag.courseId" />
+            <input type="hidden" name="testId" value="@ViewBag.testId" />
+
+            <!-- Контейнер для вариантов ответов -->
+            <div class="answer-options list">
+                <!-- Начальное количество вариантов ответа -->
+                <div class="answer-option-container">
+                    <input class="option-container-action" type="radio" name="SelectedAnswer" value="0" />
+                    <textarea class="option-container-text" type="text" name="AnswerOptions[0]"
+                        placeholder="Первый вариант ответа" required></textarea>
+                    <button type="button" class="remove-btn option-container-action" data-index="0"></button>
+                </div>
+            </div>
+            <button type="button" onclick="addAnswerOption()" class="gray-blur-background">Добавить вариант</button>
+
+            <!-- Кнопка сохранения -->
+            <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId"
+                asp-route-testId="@ViewBag.testId">Назад</a>
+            <button type="submit">Добавить</button>
+        </form>
     </div>
-    <button type="button" onclick="addAnswerOption()">Добавить вариант</button>
-
-<p></p>
-    <!-- Кнопка сохранения -->
-    <a asp-controller="Tests" asp-action="Edit" asp-route-courseId="@ViewBag.courseId" asp-route-testId="@ViewBag.testId">Назад</a>
-    <button type="submit">Добавить</button>
-</form>
 </div>
-
 
 @* Пока не троогать *@
 <script>
@@ -47,16 +50,16 @@
         const newOptionDiv = document.createElement("div");
         newOptionDiv.className = "answer-option-container";
         newOptionDiv.innerHTML = `
-            <input type="radio" name="SelectedAnswer" value="${nextIndex}" />
-            <input type="text" name="AnswerOptions[${nextIndex}]" placeholder="Новый вариант ответа" required />
-            <button type="button" class="remove-btn" data-index="${nextIndex}">Удалить</button>
+            <input class="option-container-action" type="radio" name="SelectedAnswer" value="${nextIndex}" />
+            <textarea class="option-container-text" type="text" name="AnswerOptions[${nextIndex}]" placeholder="новый вариант ответа" required> </textarea>
+            <button type="button" class="remove-btn option-container-action" data-index="${nextIndex}"></button>
         `;
         container.appendChild(newOptionDiv);
         nextIndex++;
     }
 
     // Функция для удаления варианта ответа
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (event.target.classList.contains('remove-btn')) {
             event.preventDefault();
             const parentContainer = event.target.closest('.answer-option-container');
@@ -73,4 +76,3 @@
         });
     }
 </script>
-

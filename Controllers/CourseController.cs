@@ -226,7 +226,7 @@ namespace DeLavant_CourseWeb.Controllers
                 coursesCollection.ReplaceOne(c => c.Id == objectId.ToString(), editedCourse);
             }
 
-            return RedirectToAction(nameof(Index));
+           return RedirectToAction(nameof(Edit), new { id });
         }
     }
 }

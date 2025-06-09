@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-
+using System.ComponentModel.DataAnnotations;
 namespace DeLavant_CourseWeb.Models;
 // Типы:
 //     OneOption,
@@ -16,6 +16,7 @@ public class Question {
     public string? courseId { get; set; }
     public string? testId { get; set; }
 
+    [Display(Name = "Текст вопроса")]
     public string? Text { get; set; }
     public string? QuestionType { get; set; }
 
