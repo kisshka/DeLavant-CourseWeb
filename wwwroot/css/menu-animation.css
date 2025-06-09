@@ -14,11 +14,13 @@
   user-select: none;
 }
 
+.hamburger:hover{
+    cursor:pointer;
+}
+
 .burger-main {
   position: absolute;
   padding: 20px 16px;
-  height: 68px;
-  width: 68px;
 }
 
 .burger-inner {
@@ -396,4 +398,9 @@
   .overlay {
     width: 100%;
   }
+}
+
+.my-svg{
+    height: 68px;
+    width:68px;
 }

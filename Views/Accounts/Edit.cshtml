@@ -45,8 +45,14 @@
                 <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+                <input type="submit" value="Редактировать" class="btn btn-primary" />
             </div>
+        </form>
+        <form method="post" asp-action="Delete"
+              onsubmit="return confirm('Вы точно хотите удалить?');"
+              class="d-inline">
+            <input asp-for="Id" type="hidden" class="form-control" />
+            <button type="submit">Удалить</button>
         </form>
     </div>
 </div>

@@ -1,0 +1,45 @@
+.under-menu-item {
+    position: relative; /* Необходимо для работы z-index */
+    display: flex;
+    flex-direction: column; /* Указываем элементы в колонку */
+    align-items: center; /* Центрируем элементы по горизонтали */
+    justify-content: center; /* Центрируем элементы по вертикали (если высота задается) */
+    padding: 0.25rem;
+    border: none;
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+    z-index: 1; /* Уровень наложения для контейнера */
+    width: 2rem;
+    height: 2rem;
+    text-decoration: none;
+}
+
+.under-menu-item-image {
+    max-width: 100%; /* Ограничивает ширину изображения */
+    height: auto; /* Сохраняет пропорции изображения */
+}
+
+.under-menu-item-text {
+    position: relative;
+    z-index: 2; /* Уровень наложения для текста, выше чем у контейнера */
+    color: #000; /* Исходный цвет текста */
+    transition: color 0.3s; /* Плавный переход цвета текста */
+    text-decoration: none;
+    white-space: nowrap; /* Запрет на перенос текста */
+}
+
+.under-menu-item:hover .item-text {
+    color: red; /* Цвет текста при наведении на контейнер */
+
+}
+.under-menu {
+    margin:  0 auto ; /* Центрирование вертикально */
+    padding: 0.5rem 3rem;
+    border-radius: 200px; /* Скругление */
+    border: 1px solid red;
+     width: fit-content;
+    display: flex;
+    flex-direction: row; /* Элементы располагаются в строку */
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    gap: 50px; /* Расстояние между элементами */
+    justify-content:center ;
+}

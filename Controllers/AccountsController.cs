@@ -221,25 +221,18 @@ namespace DeLavant_CourseWeb.Controllers
             return RedirectToAction(nameof(Index)); // Перенаправление на страницу пользователей
         }
 
-        // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: UserController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(string id)
         {
-            try
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if(user != null)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Users.Remove(user);
+                _context.SaveChanges();
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

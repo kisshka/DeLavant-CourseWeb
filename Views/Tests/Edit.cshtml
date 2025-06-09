@@ -3,6 +3,7 @@
     ViewData["Title"] = "Редактирование теста";
 }
 
+<div class="content-70percent-width"> 
 <h2>Редактирование теста</h2>
 
 <form method="post" asp-action="Edit">
@@ -13,18 +14,40 @@
 
     <div asp-validation-summary="All"></div>
     <div class="form-group">
-        <label asp-for="Name">Название:</label>
         <input type="text" asp-for="Name" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Описание:</label>
         <input type="text" asp-for="Description" required />
     </div>
 
-    <a asp-controller="OneOptionAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Один ответ|</a>
-    <a asp-controller="ManyOptionsAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Несколько ответов|</a>
-    <a asp-controller="StepSequenceAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Последовательность действий|</a>
-    <a asp-controller="ExtendedResponseAnswer" asp-action="Create" asp-route-testId="@Model.Id" asp-route-courseId="@ViewBag.courseIdForTest">Развернутый ответ</a>
+<div class="under-menu">
+    <a class="under-menu-item"
+    asp-controller="OneOptionAnswer" 
+    asp-action="Create" asp-route-testId="@Model.Id" 
+    asp-route-courseId="@ViewBag.courseIdForTest">
+        <img class="under-menu-item-image" src="~/icons/icon-select-one.svg" alt="">
+        <span class="under-menu-item-text">викторина</span>
+    </a>
+    <a class="under-menu-item"
+    asp-controller="ManyOptionsAnswer" 
+    asp-action="Create" asp-route-testId="@Model.Id" 
+    asp-route-courseId="@ViewBag.courseIdForTest">
+         <img class="under-menu-item-image" src="~/icons/icon-select-multiple.svg" alt="">
+        <span class="under-menu-item-text">несколько</span>
+    </a>
+    <a class="under-menu-item"
+    asp-controller="StepSequenceAnswer" 
+    asp-action="Create" asp-route-testId="@Model.Id" 
+    asp-route-courseId="@ViewBag.courseIdForTest">
+         <img class="under-menu-item-image" src="~/icons/icon-in-order.svg" alt="">
+        <span class="under-menu-item-text">порядок</span>
+    </a>
+    <a class="under-menu-item"
+    asp-controller="ExtendedResponseAnswer" 
+    asp-action="Create" asp-route-testId="@Model.Id" 
+    asp-route-courseId="@ViewBag.courseIdForTest">
+        <img class="under-menu-item-image" src="~/icons/icon-send.svg" alt="">
+        <span class="under-menu-item-text">ответ</span>
+    </a>
+</div>
 
 @* Отображение вопросов включенных в тест *@
     <h3>Список вопросов:</h3>
@@ -57,3 +80,4 @@
     <a asp-controller="Course" asp-action="Edit" asp-route-id="@ViewBag.courseIdForTest">Назад</a>
     <button type="submit">Сохранить</button>
 </form>
+</div>

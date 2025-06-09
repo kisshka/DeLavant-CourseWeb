@@ -15,18 +15,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using DeLavant_CourseWeb.Models.UserBd;
+using MongoDB.Driver;
+using DeLavant_CourseWeb.Models;
 
 namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly IMongoDatabase _database;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, IMongoDatabase database)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _database = database;
         }
 
         /// <summary>
@@ -59,21 +63,24 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+
+        public List<Course> Courses { get; set; }
         public class InputModel
         {
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Данное поле обязательно для заполения")]
+            [EmailAddress(ErrorMessage = "Неверный формат почты(example@example.ru)")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Данное поле обязательно для заполения")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -91,7 +98,9 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
-
+            var coursesCollection = _database.GetCollection<Course>("Courses");
+            var courses = coursesCollection.AsQueryable().Where(c => c.AccessTag == "Common").ToList();
+            Courses = courses;
             returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
@@ -100,12 +109,12 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -115,7 +124,7 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("Пользователь вошёл в систему");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -124,12 +133,15 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("Аккаунт заблокирован");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Неверный логин или пароль");
+                    var coursesCollection = _database.GetCollection<Course>("Courses");
+                    var courses = coursesCollection.AsQueryable().Where(c => c.AccessTag == "Common").ToList();
+                    Courses = courses;
                     return Page();
                 }
             }

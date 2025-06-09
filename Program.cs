@@ -25,6 +25,7 @@ namespace DeLavant_CourseWeb
             builder.Services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = false;
             })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<DeLavantContext>()
@@ -49,7 +50,7 @@ namespace DeLavant_CourseWeb
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Accounts}/{action=Index}/{id?}");
+                pattern: "{controller=Course}/{action=Index}/{id?}");
 
             app.Run();
         }
