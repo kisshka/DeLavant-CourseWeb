@@ -9,12 +9,19 @@
 <div class="container-welcome">
     <div class="in-container-welcome">
         <div class="content-area">
-
-            <a class="course-card-welcome" href="#"> Курс по пищевой технике безопасности </a>
-            <a class="course-card-welcome" href="#"> Курс по противопожарной технике безопасности </a>
-            <a class="course-card-welcome" href="#"> Курс по эпидиамологической технике безопасности </a>
-
-
+            @if (Model.Courses != null && Model.Courses.Any())
+            {
+                foreach (var course in Model.Courses.Take(3))
+                {
+                    <a class="course-card-welcome">
+                        <p>@course.Name</p>
+                    </a>
+                }
+            }
+            else
+            {
+                <p>Нет доступных курсов.</p>
+            }
         </div>
         <div class="button-area">
             <button class="btn-red-background">смотреть все</button>
