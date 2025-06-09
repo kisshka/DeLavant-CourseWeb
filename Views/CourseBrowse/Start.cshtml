@@ -1,0 +1,32 @@
+@model DeLavant_CourseWeb.Models.Course
+@{
+    ViewData["Title"] = $"{Model.Name}";
+}
+
+@{ var courseName = Model.Name.Length; 
+var rows = 3; var rows2 = 0; 
+if(!string.IsNullOrEmpty(Model.Description))
+    { 
+    var courseDescription = Model.Description.Length; 
+    rows2 = courseDescription/30; 
+    } 
+    
+}
+
+<div class="content-70percent-width">
+
+    <a asp-action="Index">Назад</a>
+
+   <textarea class="autoresize course-name"
+      oninput="autoResize(this)" rows="@rows"
+      asp-for="Name" readonly>
+    </textarea>
+
+    <textarea class="autoresize course-description"
+      oninput="autoResize(this)" rows="@rows2"
+      asp-for="Description" readonly>
+    </textarea>
+
+
+    <a asp-action="Passing" asp-route-id="@Model.Id" class="card-item-open">Начать</a>
+</div>
