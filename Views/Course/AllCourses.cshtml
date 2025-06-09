@@ -1,0 +1,15 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Курсы";
+}
+
+    @foreach (var course in Model)
+    {
+        <div class="card-item">
+            <span class="card-item-name">
+                @course.Name
+            </span>
+        <a class="card-item-open" asp-action="Edit" asp-route-id="@course.Id">@course.CreatingDate</a>
+        </div>
+
+    }

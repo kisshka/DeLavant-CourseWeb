@@ -150,6 +150,18 @@ namespace DeLavant_CourseWeb.Controllers
             return RedirectToAction(nameof(Edit), new { id });
         }
 
+        public IActionResult AllCourses (string? accessType)
+        { 
+            var coursesCollection = _database.GetCollection<Course>("Courses");
+            var courses = coursesCollection.AsQueryable().ToList();
+            if(accessType != "All")
+            {
+            courses = coursesCollection.AsQueryable().Where(c => c.AccessTag == accessType).ToList();
+            }
+
+            return View(courses);
+        }
+
         public IActionResult Access(string id, string? accessType)
         {   
             ViewBag.SelectedId = id;
