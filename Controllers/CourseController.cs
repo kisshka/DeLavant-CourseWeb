@@ -10,7 +10,7 @@ using MongoDB.Driver;
 
 namespace DeLavant_CourseWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CourseController : Controller
     {
         private readonly IMongoDatabase _database;

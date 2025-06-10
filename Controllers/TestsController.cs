@@ -1,11 +1,13 @@
 using System.Diagnostics;
 using DeLavant_CourseWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace DeLavant_CourseWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TestsController : Controller
     {
         private readonly IMongoDatabase _database;
