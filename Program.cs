@@ -72,11 +72,12 @@ namespace DeLavant_CourseWeb
             app.UseRouting();
             app.MapRazorPages();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Course}/{action=Index}/{id?}");
+                pattern: "{controller=Division}/{action=Index}/{id?}");
 
             app.Run();
         }
