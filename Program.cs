@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DeLavant_CourseWeb.Models.UserBd;
 using MongoDB.Driver;
+
 namespace DeLavant_CourseWeb
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("DeLavantContextConnection") ?? throw new InvalidOperationException("Connection string 'DeLavantContextConnection' not found.");
@@ -38,6 +39,31 @@ namespace DeLavant_CourseWeb
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+/*            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var roles = new[] { "Admin" };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole  (role));
+                    }
+                }
+                var userName = "IamAdmin";
+                var email = "admin@mail.com";
+                var password = "Admin123!";
+                var surname = "Лучшая";
+                var name = "Ольга";
+                var fatherName = "Александровна";
+                var user = new User { UserName = userName, Email = email, UserSurName = surname, Name = name, UserFatherName = fatherName };
+                var createResult = await userManager.CreateAsync(user, password);
+                var addRoleResult = await userManager.AddToRoleAsync(user, "Admin");
+            }*/
+
 
             app.UseHttpsRedirection();
             
