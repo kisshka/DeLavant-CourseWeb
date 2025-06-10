@@ -1,0 +1,22 @@
+@model DeLavant_CourseWeb.Models.Test
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>Тест: @Model.Name</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Прохождение теста</h5>
+        <p class="card-text">@Model.Description</p>
+
+        <form method="post" asp-action="SubmitTest" asp-route-userId="@ViewBag.UserId" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@ViewBag.Step">
+            <!-- Форма для ввода ответов на вопросы -->
+            <button type="submit" class="btn btn-primary">Сдать тест</button>
+        </form>
+
+        <a class="btn btn-outline-primary mt-3" asp-action="FinishStep" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@(ViewBag.Step)">Пропустить тест</a>
+    </div>
+</div>
