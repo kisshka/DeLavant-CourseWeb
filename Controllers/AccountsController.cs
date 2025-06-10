@@ -74,8 +74,8 @@ namespace DeLavant_CourseWeb.Controllers
                 var user = new User
                 {
                     UserSurName = inputUser.UserSurName,
-                    Name = inputUser.UserName,
-                    UserName = inputUser.Email,
+                    Name = inputUser.Name,
+                    UserName = inputUser.UserName,
                     UserFatherName = inputUser.UserFatherName,
                     Email = inputUser.Email,
                     IdArea = inputUser.SelectedAreaId
@@ -146,9 +146,10 @@ namespace DeLavant_CourseWeb.Controllers
             // Маппируем данные пользователя в RegisterInputModel
             var editInputModel = new EditUserViewModel
             {
+                UserName = user.UserName,
                 Email = user.Email,
                 UserSurName = user.UserSurName,
-                UserName = user.Name,
+                Name = user.Name,
                 UserFatherName = user.UserFatherName,
                 SelectedPostIds = user.Posts.Select(p => p.IdPost).Cast<int?>().ToList(),
                 SelectedAreaId = user.IdArea ?? 0
@@ -185,8 +186,9 @@ namespace DeLavant_CourseWeb.Controllers
             }
 
             // Обновляем поля пользователя из входящей модели
+            user.UserName = editUser.UserName;
             user.UserSurName = editUser.UserSurName;
-            user.Name = editUser.UserName;
+            user.Name = editUser.Name;
             user.UserFatherName = editUser.UserFatherName;
             user.Email = editUser.Email;
             if (editUser.SelectedAreaId == 0)
@@ -217,7 +219,15 @@ namespace DeLavant_CourseWeb.Controllers
 
             // Сохраняем изменения
             await _context.SaveChangesAsync();
+            ViewBag.Posts = _context.Posts.Select(p => new SelectListItem
+            {
+                Value = p.IdPost.ToString(),
+                Text = p.Title
+            }).OrderBy(p => p.Text).ToList();
 
+            var areas = _context.Areas.OrderBy(a => a.NameArea).ToList();
+            areas.Insert(0, new Area { IdArea = 0, NameArea = "Без участка" });
+            ViewBag.Areas = new SelectList(areas, "IdArea", "NameArea");
             return RedirectToAction(nameof(Index)); // Перенаправление на страницу пользователей
         }
 

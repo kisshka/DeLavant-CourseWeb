@@ -13,38 +13,43 @@
     <div class="two-column-container">
       <div class="column left-column">
         <div class="form-group">
-          <label asp-for="UserSurName"></label>
+            <label asp-for="UserName">Логин</label>
+            <span asp-validation-for="UserName" class="text-danger"></span>
+            <input asp-for="UserName" />
+        </div>
+        <div class="form-group">
+          <label asp-for="UserSurName">Фамилия</label>
           <span asp-validation-for="UserSurName" class="text-danger"></span>
           <input asp-for="UserSurName" />
         </div>
 
         <div class="form-group">
-          <label asp-for="UserName"></label>
-          <span asp-validation-for="UserName" class="text-danger"></span>
-          <input asp-for="UserName" />
+          <label asp-for="Name">Имя</label>
+          <span asp-validation-for="Name" class="text-danger"></span>
+          <input asp-for="Name" />
         </div>
 
         <div class="form-group">
-          <label asp-for="UserFatherName"></label>
+          <label asp-for="UserFatherName">Отчество</label>
           <span asp-validation-for="UserFatherName" class="text-danger"></span>
           <input asp-for="UserFatherName" />
         </div>
 
         <div class="form-group">
-          <label asp-for="Email"></label>
+          <label asp-for="Email">Почта</label>
           <span asp-validation-for="Email" class="text-danger"></span>
 
           <input asp-for="Email" />
         </div>
 
         <div class="form-group">
-          <label asp-for="Password"></label>
+          <label asp-for="Password">Пароль</label>
           <span asp-validation-for="Password" class="text-danger"></span>
           <input asp-for="Password" class="form-control" />
         </div>
 
         <div class="form-group">
-          <label asp-for="ConfirmPassword"></label>
+          <label asp-for="ConfirmPassword">Подтверждение пароля</label>
           <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
           <input asp-for="ConfirmPassword" />
         </div>
@@ -53,7 +58,7 @@
 
       <div class="column right-column">
         <div class="form-group">
-          <label asp-for="SelectedPostIds"></label>
+          <label asp-for="SelectedPostIds">Должности</label>
           <span asp-validation-for="SelectedPostIds" class="text-danger"></span>
           <input
             type="text"
@@ -72,7 +77,7 @@
         </div>
 
         <div class="form-group">
-          <label asp-for="SelectedAreaId"></label>
+          <label asp-for="SelectedAreaId">Участки</label>
           <span asp-validation-for="SelectedAreaId" class="text-danger"></span>
           <select
             asp-for="SelectedAreaId"

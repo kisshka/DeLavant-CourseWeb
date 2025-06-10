@@ -72,9 +72,10 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required(ErrorMessage = "Данное поле обязательно для заполения")]
-            [EmailAddress(ErrorMessage = "Неверный формат почты(example@example.ru)")]
-            public string Email { get; set; }
+            [Required(ErrorMessage = "Данное поле обязательно для заполнения")]
+            [Length(2, 50, ErrorMessage = "Имя пользователя может содержать от 2 до 50 символов")]
+            [Display(Name = "Логин")]
+            public string UserName { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -121,7 +122,7 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Пользователь вошёл в систему");

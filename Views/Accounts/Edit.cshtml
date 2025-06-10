@@ -12,6 +12,11 @@
                 <input asp-for="Id" type="hidden" class="form-control" />
             </div>
             <div class="form-group">
+                <label asp-for="UserName">Логин</label>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+                <input asp-for="UserName" />
+            </div>
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -22,9 +27,9 @@
                 <span asp-validation-for="UserSurName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UserFatherName" class="control-label"></label>

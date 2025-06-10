@@ -17,6 +17,11 @@ namespace DeLavant_CourseWeb.Models.UserBd
 
         [Required(ErrorMessage = "Данное поле обязательно для заполнения")]
         [Length(2, 50, ErrorMessage = "Имя может содержать от 2 до 50 символов")]
+        public string? Name { get; set; }
+
+        [Required(ErrorMessage = "Данное поле обязательно для заполнения")]
+        [Length(2, 50, ErrorMessage = "Имя пользователя может содержать от 2 до 50 символов")]
+        [Display(Name = "Логин")]
         public string? UserName { get; set; }
 
 
