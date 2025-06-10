@@ -64,8 +64,8 @@ namespace DeLavant_CourseWeb.Controllers
             }
         }
 
-// Открытие первого шага курса
-     // Начало прохождения курса
+
+//ОТКРЫВАЕТ КУРС С САМОГО НАЧАЛА 
     public async Task<IActionResult> OpenCourse(string courseId)
     {
         var coursesCollection = _database.GetCollection<Course>("Courses");
@@ -89,14 +89,14 @@ namespace DeLavant_CourseWeb.Controllers
                 Id = ObjectId.GenerateNewId().ToString(),
                 IdentityUserId = identityUser.Id,
                 Surname = identityUser.UserSurName,
-                Name = identityUser.UserName,
+                Name = identityUser.Name,
                 Patronimyc = identityUser.UserFatherName,
                 Email = identityUser.Email,
                 CourseProgresses = new List<CourseProgress>()
             };
             usersCollection.InsertOneAsync(user);
         }
-        
+
         // Проверка наличия прогресса по курсу
         var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
 
@@ -114,11 +114,43 @@ namespace DeLavant_CourseWeb.Controllers
         }
         //При повторном прохождении курса прогресс обнуляется
         courseProgress.CompletedSteps = 0;
+            await usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
         // Открываем первый шаг
         return RedirectToAction("ViewStep", new { courseId, userId = user.Id, step = 0 });
     }
 
-    // Демонстрация текущего шага курса
+//ФУНКЦИЯ КОТОРАЯ ПЕРЕНАПРАВЯЕТ ПОЛЬЗОВАТЕЛЯ НА ПОСЛЕДНИЙ СЕГМЕНТ КУРСА КОТОРЫЙ ОН ПРОХОДИТ
+    public async Task<IActionResult> ContinueCourse(string courseId)
+    {
+        var coursesCollection = _database.GetCollection<Course>("Courses");
+        var usersCollection = _database.GetCollection<CourseUser>("Users");
+
+        var identityUser = _userManager.GetUserAsync(User).Result;
+
+        var course = await coursesCollection.Find(c => c.Id == courseId).FirstOrDefaultAsync();
+        if (course == null)
+        {
+            return NotFound();
+        }
+
+        var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
+
+        // Проверка наличия прогресса по курсу
+        var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
+
+        if (courseProgress == null || courseProgress.CompletedSteps == 0)
+        {
+            // Если прогресса нет или он пустой, начинаем с первого шага
+            return RedirectToAction("ViewStep", new { courseId, userId = user.Id, step = 0 });
+        }
+        else
+        {
+            // Открываем следующий шаг после последнего пройденного
+            return RedirectToAction("ViewStep", new { courseId, userId = user.Id, step = courseProgress.CompletedSteps });
+        }
+    }
+
+//ДЕМОНСТРАЦИЯ ТЕКУЩЕГО ШАГА КУРСА
 public async Task<IActionResult> ViewStep(string courseId, int step)
 {
     var coursesCollection = _database.GetCollection<Course>("Courses");
@@ -147,11 +179,6 @@ public async Task<IActionResult> ViewStep(string courseId, int step)
     ViewBag.courseId = courseId;
     ViewBag.step = step;
 
-
-    // Обновляем прогресс в базе данных
-    courseProgress.CompletedSteps++; // Инкрементируем прошедший шаг
-    await usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user); // Сохраняем изменения
-
     if (isLecture)
     {
         var lecture = course.Lectures[step];
@@ -162,6 +189,26 @@ public async Task<IActionResult> ViewStep(string courseId, int step)
         var test = course.Tests[step - course.Lectures.Count];
         return View("Test", test);
     }
+}
+
+// Завершение шага
+public async Task<IActionResult> FinishStep(string courseId, int step)
+{
+    var usersCollection = _database.GetCollection<CourseUser>("Users");
+    var identityUser = _userManager.GetUserAsync(User).Result;
+
+    var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
+    var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
+
+    if (courseProgress == null)
+        return NotFound();
+
+    // Только здесь увеличиваем прогресс
+    courseProgress.CompletedSteps++;
+    await usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
+
+    // Идём на следующий шаг
+    return RedirectToAction("ViewStep", new { courseId, step = step + 1 });
 }
 
     //Завершение курса

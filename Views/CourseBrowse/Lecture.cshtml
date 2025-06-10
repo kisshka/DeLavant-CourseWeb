@@ -10,6 +10,6 @@
     <div class="card-body">
         <h5 class="card-title">Содержание лекции</h5>
         <p class="card-text">@Model.Description</p>
-        <a class="btn btn-primary" asp-action="ViewStep" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@(ViewBag.Step + 1)">Далее</a>
+        <a class="btn btn-primary" asp-action="FinishStep" asp-route-userId="@ViewBag.UserId" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@(ViewBag.Step)">Далее</a>
     </div>
 </div>
