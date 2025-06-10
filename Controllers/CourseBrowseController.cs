@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using DeLavant_CourseWeb.Models;
 using DeLavant_CourseWeb.Models.UserBd;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using MongoDB.Driver;
 
 namespace DeLavant_CourseWeb.Controllers
 {
+    [Authorize]
     public class CourseBrowseController : Controller
     {
         private readonly IMongoDatabase _database;

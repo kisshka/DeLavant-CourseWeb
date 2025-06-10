@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DeLavant_CourseWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AreasController : Controller
     {
         private readonly DeLavantContext _context;

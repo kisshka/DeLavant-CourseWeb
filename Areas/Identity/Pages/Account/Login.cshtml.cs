@@ -126,7 +126,18 @@ namespace DeLavant_CourseWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Пользователь вошёл в систему");
-                    return LocalRedirect(returnUrl);
+                    // Получаем текущего пользователя
+                    var currentUser = await _signInManager.UserManager.FindByNameAsync(Input.UserName);
+                    // Проверяем роль пользователя
+                    bool isAdmin = await _signInManager.UserManager.IsInRoleAsync(currentUser, "Admin");
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "Course");  // Административная страница
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "CourseBrowse");   // Обычная домашняя страница
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

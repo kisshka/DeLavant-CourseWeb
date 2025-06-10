@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DeLavant_CourseWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountsController : Controller
     {
 
@@ -28,10 +28,9 @@ namespace DeLavant_CourseWeb.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            var user = _context.Users
-                .Include(p => p.Posts)
-                .Include(a => a.Areas).ToList();
-            return View(user);
+            var allUsers = _context.Users.Include(p => p.Posts).Include(a => a.Areas).ToList(); ;
+            var notAdminUsers = allUsers.Where(u => !_userManager.IsInRoleAsync(u,"Admin").Result).ToList();
+            return View(notAdminUsers);
         }
 
         // GET: UserController/Details/5

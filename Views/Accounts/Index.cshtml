@@ -11,8 +11,8 @@
     @foreach (var item in Model) {
     <div class="card-item">
       <span class="card-item-name">
-        @Html.DisplayFor(modelItem => item.UserSurName) 
-        @Html.DisplayFor(modelItem => item.Name) 
+        @Html.DisplayFor(modelItem => item.UserSurName)
+        @Html.DisplayFor(modelItem => item.Name)
         @Html.DisplayFor(modelItem => item.UserFatherName)
         @if
         (item.Areas != null) { @item.Areas.NameArea } 
