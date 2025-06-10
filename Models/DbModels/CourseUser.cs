@@ -8,6 +8,7 @@ public class CourseUser
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
+        public string? IdentityUserId { get; set; }
         public string? Surname { get; set; }
         public string? Name { get; set; }
         public string? Patronimyc { get; set; }
@@ -15,5 +16,6 @@ public class CourseUser
         //Список отделов
         public string? Department { get; set; }
         public List<string>? Posts { get; set; }
-        public List<CompletedTest>? CompletedTests { get; set; }      
+
+        public List<CourseProgress>? CourseProgresses { get; set; }
     }

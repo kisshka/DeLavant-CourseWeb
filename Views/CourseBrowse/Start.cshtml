@@ -28,5 +28,12 @@ if(!string.IsNullOrEmpty(Model.Description))
     </textarea>
 
 
-    <a asp-action="Passing" asp-route-id="@Model.Id" class="card-item-open">Начать</a>
+    <a class="card-item-open" asp-action="OpenCourse" asp-route-courseId="@Model.Id">Начать курс</a>
+
+  @if(ViewBag.Progress != null) {
+    <a class="card-item-open" asp-action="ViewStep" asp-route-courseId="@Model.Id" asp-route-step="@ViewBag.Progress">Продолжить </a>
+  }
+
+
+
 </div>
