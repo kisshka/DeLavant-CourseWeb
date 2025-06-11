@@ -16,7 +16,6 @@
 
 $(document).ready(function () {
   var Closed = false;
-  $(".overlay").addClass("hidden");
   $(".hamburger").click(function () {
     if (Closed) {
       $(this).removeClass("open");
