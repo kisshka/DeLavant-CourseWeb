@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using DeLavant_CourseWeb.Migrations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography;
 
 namespace DeLavant_CourseWeb.Controllers
 {
@@ -28,7 +29,7 @@ namespace DeLavant_CourseWeb.Controllers
         // GET: UserController
         public ActionResult Index()
         {
-            var allUsers = _context.Users.Include(p => p.Posts).Include(a => a.Areas).ToList(); ;
+            var allUsers = _context.Users.Include(p => p.Posts).Include(a => a.Areas).ToList();
             var notAdminUsers = allUsers.Where(u => !_userManager.IsInRoleAsync(u,"Admin").Result).ToList();
             return View(notAdminUsers);
         }
@@ -99,8 +100,6 @@ namespace DeLavant_CourseWeb.Controllers
                     }
 
                     await _context.SaveChangesAsync();
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -242,6 +241,78 @@ namespace DeLavant_CourseWeb.Controllers
                 _context.SaveChanges();
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        // Генерация случайного логина и пароля
+        private async Task<string> GenerateUniqueUsernameAsync()
+        {
+            while (true)
+            {
+                char firstChar = GetRandomLetter();
+                List<char> restChars = Enumerable.Range(1, 7)
+                                        .Select(_ => GetRandomChar())
+                                        .ToList();
+                int capitalPosition = Random.Shared.Next(restChars.Count);
+                restChars[capitalPosition] = Char.ToUpper(restChars[capitalPosition]);
+                var username = firstChar + new string(restChars.ToArray());
+                bool exists = await _context.Users.AnyAsync(u => u.UserName == username);
+                if (!exists)
+                    return username;
+            }
+        }
+
+        // Функция для выбора случайной буквы
+        private static char GetRandomLetter()
+        {
+            string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            return letters[Random.Shared.Next(letters.Length)];
+        }
+
+        // Функция для выбора случайного символа
+        private static char GetRandomChar()
+        {
+            string allChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return allChars[Random.Shared.Next(allChars.Length)];
+        }
+
+        private static string GenerateSecurePassword(int length = 10)
+        {
+            Span<byte> randomBytes = stackalloc byte[length];
+            RandomNumberGenerator.Fill(randomBytes);
+
+            string basePassword = Convert.ToBase64String(randomBytes).Substring(0, length);
+
+            string filteredPassword = new string(
+                basePassword.Where(c => char.IsLetterOrDigit(c)).Take(length - 1).ToArray()
+            );
+            int specialSymbolPosition = Random.Shared.Next(filteredPassword.Length + 1);
+            string finalPassword = filteredPassword.Insert(specialSymbolPosition, "!");
+
+            return finalPassword;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Generate()
+        {
+            try
+            {
+                // Генерируем уникальное имя пользователя
+                var uniqueUsername = await GenerateUniqueUsernameAsync();
+
+                // Генерируем безопасный пароль
+                var securePassword = GenerateSecurePassword();
+
+                return Json(new
+                {
+                    success = true,
+                    username = uniqueUsername,
+                    password = securePassword
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false });
+            }
         }
     }
 }

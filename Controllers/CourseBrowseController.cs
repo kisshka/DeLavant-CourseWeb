@@ -11,7 +11,6 @@ using MongoDB.Driver;
 
 namespace DeLavant_CourseWeb.Controllers
 {
-    [Authorize]
     public class CourseBrowseController : Controller
     {
         private readonly IMongoDatabase _database;
