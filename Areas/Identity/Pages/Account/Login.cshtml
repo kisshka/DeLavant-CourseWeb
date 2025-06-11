@@ -13,7 +13,7 @@
             {
                 foreach (var course in Model.Courses.Take(3))
                 {
-                    <a class="course-card-welcome">
+                    <a class="course-card-welcome" asp-route-id="@course.Id" asp-action="Start" asp-controller="CourseBrowse">
                         <p>@course.Name</p>
                     </a>
                 }
@@ -24,7 +24,7 @@
             }
         </div>
         <div class="button-area">
-            <button class="btn-red-background">смотреть все</button>
+            <button class="btn-red-background" asp-route-accessType="Common" asp-action="AllCourses" asp-controller="Course" formmethod="post">смотреть все</button>
         </div>
     </div>
    

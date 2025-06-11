@@ -2,6 +2,7 @@ using System.Diagnostics;
 using DeLavant_CourseWeb.Models;
 using DeLavant_CourseWeb.Models.UserBd;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,14 @@ namespace DeLavant_CourseWeb.Controllers
         private readonly IMongoDatabase _database;
         private readonly DeLavantContext _context;
         private readonly ILogger<CourseController> _logger;
+        private readonly UserManager<User> _userManager;
 
-        public CourseController(ILogger<CourseController> logger, IMongoDatabase database, DeLavantContext context)
+        public CourseController(ILogger<CourseController> logger, IMongoDatabase database, UserManager<User> userManager, DeLavantContext context)
         {
             _database = database;
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -191,7 +194,9 @@ namespace DeLavant_CourseWeb.Controllers
                     return PartialView("_GroupAccess");
                     
                 case "Individual":
-                    ViewBag.Users = _context.Users
+                    var allUsers = _context.Users.ToList();
+                    var notAdminUsers = allUsers.Where(u => !_userManager.IsInRoleAsync(u, "Admin").Result).ToList();
+                    ViewBag.Users = notAdminUsers
                         .Select(p => new SelectListItem
                         {
                             Value = p.Id.ToString(),

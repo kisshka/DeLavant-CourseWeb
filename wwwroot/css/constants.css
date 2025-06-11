@@ -41,3 +41,11 @@ body {
   --link: 2rem;
   --button-text: 2rem;
 }
+.toggle-password {
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    user-select: none;
+    padding-left: 5px;
+}
