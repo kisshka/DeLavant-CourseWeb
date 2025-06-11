@@ -1,22 +1,76 @@
 @model DeLavant_CourseWeb.Models.Test
-
+@using DeLavant_CourseWeb.Models
 @{
     Layout = "_Layout";
-    ViewData["Title"] = Model.Name;
+    ViewData["Title"] = "Тест";
 }
 
 <h1>Тест: @Model.Name</h1>
 
-<div class="card mb-3">
-    <div class="card-body">
-        <h5 class="card-title">Прохождение теста</h5>
-        <p class="card-text">@Model.Description</p>
+@if (ViewBag.questions != null)
+{
+    <form method="post" asp-action="SubmitTest" asp-route-courseId="@ViewBag.courseId" asp-route-step="@ViewBag.step">
+        @for (int questionIndex = 0; questionIndex < ViewBag.questions.Count; questionIndex++)
+        {
+            var question = ViewBag.questions[questionIndex];
+            <div class="mb-3">
+                @if (question.QuestionType == "OneOption")
+                {
+                    <div class="mb-3">
+                        <strong>Вопрос @(questionIndex + 1):</strong> @question.Text
+                        @for (int oIndex = 0; oIndex < question.OneAnswerOptions.Count; oIndex++)
+                        {
+                            var opt = question.OneAnswerOptions[oIndex];
 
-        <form method="post" asp-action="SubmitTest" asp-route-userId="@ViewBag.UserId" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@ViewBag.Step">
-            <!-- Форма для ввода ответов на вопросы -->
-            <button type="submit" class="btn btn-primary">Сдать тест</button>
-        </form>
+                            // Предварительно формируем уникальное имя идентификатора
+                            var uniqueId = $"question_{questionIndex}_option_{oIndex}";
 
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="SelectedAnswers[@questionIndex]" value="@opt.Text" id="@uniqueId">
+                                <label class="form-check-label" for="@uniqueId">@opt.Text</label>
+                            </div>
+                        }
+                    </div>
+                }
+                else if  (question.QuestionType == "ManyOptions")
+                {
+                    <strong>Вопрос @(questionIndex + 1):</strong> @question.Text
+                    // Чекбоксы для множественных ответов
+                    @for (int OptionIndex = 0; OptionIndex < question.ManyAnswersOptions.Count; OptionIndex++)
+                    {
+                        var opt = question.ManyAnswersOptions[OptionIndex];
+                            
+                        // Предварительно формируем уникальное имя идентификатора
+                        var uniqueId = $"question_{questionIndex}_option_{OptionIndex}";
+
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="SelectedAnswers[@questionIndex][]" value="@opt.Text" id="@uniqueId">
+                            <label class="form-check-label" for="@uniqueId">@opt.Text</label>
+                        </div>
+                    }
+                }
+                else if (question.QuestionType == "Sequence")
+                {
+                    <strong>Вопрос @(questionIndex + 1):</strong> @question.Text
+                    // Поля для расстановки номеров шагов
+                    <ol class="steps-sequence">
+                        @for (int StepIndex = 0; StepIndex < question.StepsSequence.Count; StepIndex++)
+                        {
+                            var step = question.StepsSequence[StepIndex];
+                            <li>
+                                <input type="number" min="1" max="@question.StepsSequence.Count" name="SelectedSteps[@questionIndex][@StepIndex]" value="@(StepIndex + 1)" style="width: 50px;" />    @step.Text
+                            </li>
+                        }
+                    </ol>
+                }
+            </div>
+        }
+        <button type="submit" class="btn btn-primary">Сдать тест</button>
         <a class="btn btn-outline-primary mt-3" asp-action="FinishStep" asp-route-courseId="@ViewBag.CourseId" asp-route-step="@(ViewBag.Step)">Пропустить тест</a>
-    </div>
-</div>
+    </form>
+}
+else
+{
+    <p>Нет вопросов для данного теста.</p>
+}
