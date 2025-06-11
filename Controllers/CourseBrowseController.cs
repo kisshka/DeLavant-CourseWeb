@@ -32,7 +32,7 @@ namespace DeLavant_CourseWeb.Controllers
             return View(courses);
         }
 
-//Страница с названием и описанием теста, отсюда начинается прохождение
+//СТРАНИЦА НАЧАЛА ПРОХОЖДЕНИЯ КУРСА ГДЕ МОЖНО НАЧАТЬ СНАЧАЛА ИЛИ ПРОДОЛЖИТЬ
         public async Task <IActionResult> Start(string id)
         {   
             var usersCollection = _database.GetCollection<CourseUser>("Users");
@@ -153,70 +153,112 @@ namespace DeLavant_CourseWeb.Controllers
     }
 
 //ДЕМОНСТРАЦИЯ ТЕКУЩЕГО ШАГА КУРСА
-public async Task<IActionResult> ViewStep(string courseId, int step)
-{
-    var coursesCollection = _database.GetCollection<Course>("Courses");
-    var usersCollection = _database.GetCollection<CourseUser>("Users");
-    var identityUser = _userManager.GetUserAsync(User).Result;
-
-    var course = await coursesCollection.Find(c => c.Id == courseId).FirstOrDefaultAsync();
-    if (course == null)
-        return NotFound();
-
-    var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
-    var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
-
-    if (courseProgress == null || step > courseProgress.CompletedSteps)
-        return Forbid(); // Защита от обхода порядка шагов
-
-    // Проверка на конец курса
-    var totalSteps = course.Lectures.Count + course.Tests.Count;
-    if (step >= totalSteps)
-        return RedirectToAction("Final", new { courseId, identityUser.Id });
-
-    // Определяем, какой элемент показать (лекция или тест)
-    var isLecture = step < course.Lectures.Count;
-
-    // Передача в представление
-    ViewBag.courseId = courseId;
-    ViewBag.step = step;
-
-    if (isLecture)
+    public async Task<IActionResult> ViewStep(string courseId, int step)
     {
-        var lecture = course.Lectures[step];
-        return View("Lecture", lecture);
+        var coursesCollection = _database.GetCollection<Course>("Courses");
+        var usersCollection = _database.GetCollection<CourseUser>("Users");
+        var identityUser = _userManager.GetUserAsync(User).Result;
+
+        var course = await coursesCollection.Find(c => c.Id == courseId).FirstOrDefaultAsync();
+        if (course == null)
+            return NotFound();
+
+        var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
+        var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
+
+        if (courseProgress == null || step > courseProgress.CompletedSteps)
+            return Forbid(); // Защита от обхода порядка шагов
+
+        // Проверка на конец курса
+        var totalSteps = course.Lectures.Count + course.Tests.Count;
+        if (step >= totalSteps)
+            return RedirectToAction("Final", new { courseId, identityUser.Id });
+
+        // Определяем, какой элемент показать (лекция или тест)
+        var isLecture = step < course.Lectures.Count;
+
+        // Передача в представление
+        ViewBag.courseId = courseId;
+        ViewBag.step = step;
+
+        if (isLecture)
+        {
+        return RedirectToAction("Lecture", new { courseId, step });
+        }
+        else
+        {
+        return RedirectToAction("Test", new { courseId, step });
+        }
     }
-    else
+
+// ЗАВЕРШЕНИЕ ШАГА И УВЕЛИЧЕНИЕ ПРОГРЕССА ПОЛЬЗОВАТЕЛЯ
+    public async Task<IActionResult> FinishStep(string courseId, int step)
     {
-        var test = course.Tests[step - course.Lectures.Count];
-        return View("Test", test);
+        var usersCollection = _database.GetCollection<CourseUser>("Users");
+        var identityUser = _userManager.GetUserAsync(User).Result;
+
+        var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
+        var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
+
+        if (courseProgress == null)
+            return NotFound();
+
+        // Только здесь увеличиваем прогресс
+        courseProgress.CompletedSteps++;
+        await usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
+
+        // Идём на следующий шаг
+        return RedirectToAction("ViewStep", new { courseId, step = step + 1 });
     }
-}
 
-// Завершение шага
-public async Task<IActionResult> FinishStep(string courseId, int step)
-{
-    var usersCollection = _database.GetCollection<CourseUser>("Users");
-    var identityUser = _userManager.GetUserAsync(User).Result;
-
-    var user = await usersCollection.Find(u => u.IdentityUserId == identityUser.Id).FirstOrDefaultAsync();
-    var courseProgress = user.CourseProgresses?.FirstOrDefault(cp => cp.CourseId == courseId);
-
-    if (courseProgress == null)
-        return NotFound();
-
-    // Только здесь увеличиваем прогресс
-    courseProgress.CompletedSteps++;
-    await usersCollection.ReplaceOneAsync(u => u.Id == user.Id, user);
-
-    // Идём на следующий шаг
-    return RedirectToAction("ViewStep", new { courseId, step = step + 1 });
-}
-
-    //Завершение курса
+//СТРАНИЦА ЗАВЕРШЕНИЯ КУРСА
         public IActionResult Final(string courseId, string userId)
         {
             return View();
         }
+
+        public async Task<IActionResult> Lecture( string courseId, int step)
+        {
+            var coursesCollection = _database.GetCollection<Course>("Courses");    
+            var course = await coursesCollection.Find(c => c.Id == courseId).FirstOrDefaultAsync();
+
+                ViewBag.courseId = courseId;
+                ViewBag.step = step;
+                var lecture = course.Lectures[step];
+
+            return View(lecture);
+        }
+
+        public async Task<IActionResult> Test(string courseId, int step)
+        {
+            var coursesCollection = _database.GetCollection<Course>("Courses");
+            var questionsCollection = _database.GetCollection<Question>("Questions");
+
+            var course = await coursesCollection.Find(c => c.Id == courseId).FirstOrDefaultAsync();
+            if (course == null)
+                return NotFound();
+
+            var test = course.Tests[step - course.Lectures.Count];
+            if (test == null)
+                return NotFound();
+
+            // Выборка вопросов, относящихся к тесту
+            var questions = questionsCollection.AsQueryable().ToList();
+            List<Question> questionsForTest = new List<Question>();
+            foreach (Question question in questions)
+            {
+                if (question.testId == test.Id && question.courseId == courseId)
+                {
+                    questionsForTest.Add(question);
+                }
+            }
+
+            ViewBag.courseId = courseId;
+            ViewBag.step = step;
+            ViewBag.questions = questionsForTest;
+
+            return View(test);
+        }
+
     }
 }
